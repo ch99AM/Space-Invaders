@@ -7,33 +7,45 @@ import com.badlogic.gdx.graphics.Texture;
 public class Disparo extends PantallaBase {
 	MainInvaders invaders;
 	
-	private int x,y;
+	private int y;
+	private int x;
 	Texture bala;
 	boolean disparado;	
 	
 	public Disparo(MainInvaders mainInvaders) {
 		super(mainInvaders);
 		this.invaders = mainInvaders;
-		
-		Texture bala = new Texture("bala.png");
-		this.y = 80;
+
+	
+		bala = new Texture("bala.png");
+		this.y = 700;
 		this.disparado = false;
 	}
-	@Override
-	public void render(float delta) {
-		this.disparado = true; 
+	//@Override
+	public void render(float delta) {		
+		if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
+			this.disparado = true;
+		}
 		
-		MainInvaders.batch.draw(bala, 30, this.y);
-		y++;
-		if (y == 100) {
-			this.disparado =  false;
+		if (this.disparado) {
+			MainInvaders.batch.draw(bala, x, y);
+			if (this.y < 700) {
+				this.y += 45 ;
+			}
+			else {
+				this.disparado = false;
+			}
 		}
 	}
 
-	
-	
-	
-	
+	public void  setX(int x) {
+		if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
+			if ( y >= 700) {
+				this.y = 80;
+				this.x = x + 30;
+			}
+		}
+	}
 	
 	
 	
@@ -80,8 +92,4 @@ public class Disparo extends PantallaBase {
 		
 	}
 	
-	
-
-
-
 }

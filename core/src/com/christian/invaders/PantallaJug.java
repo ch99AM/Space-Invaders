@@ -2,24 +2,21 @@ package com.christian.invaders;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-public class PantallaJug extends PantallaBase {
+public class PantallaJug extends PantallaBase {	
 	MainInvaders invaders;
 	
 	Texture naveJ;
-	private int x;	
-	
+	private int x;
 	private int puntaje;
 	private String nombre;
 	private int vida;
 
-	public PantallaJug(MainInvaders mainInvaders) {
+	public PantallaJug(MainInvaders mainInvaders) {	
 		super(mainInvaders);
 		this.invaders = mainInvaders; 
-			
+		
 		this.x = (invaders.fondo.getWidth()/2-30);
 		naveJ = new Texture("naveJugador.png");
 		this.vida = 3;
@@ -32,7 +29,7 @@ public class PantallaJug extends PantallaBase {
 		// TODO Auto-generated method stub
 		x = mover();
 		MainInvaders.batch.draw(naveJ, x, 0);
-
+			
 	}
 	public int mover() {
 		boolean der = Gdx.input.isKeyPressed(Input.Keys.RIGHT);
@@ -48,9 +45,9 @@ public class PantallaJug extends PantallaBase {
 		return x;
 	}
 	
-	
-	
-	
+	public int getX() {
+		return x;
+	}
 	
 	
 	
