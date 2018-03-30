@@ -1,17 +1,15 @@
 package com.christian.invaders;
 
-import com.badlogic.gdx.graphics.Texture;
-
 public class NodoSimple {
-	Texture nave;
+	NaveEnemigo enemigo;
 	private NodoSimple siguiente;
 
-	public NodoSimple() {
+	public NodoSimple(int vida, int x ,int y) {
 		this.siguiente = null;
-		nave = new Texture("naveEne.png");
+		enemigo = new NaveEnemigo(vida, x, y);
 	}
-	public Texture getValor() {
-		return nave;
+	public NaveEnemigo getValor() {
+		return enemigo;
 	}
 	public NodoSimple getSiguiente() {
 		return siguiente;

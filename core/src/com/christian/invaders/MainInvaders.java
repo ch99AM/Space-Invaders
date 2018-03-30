@@ -24,7 +24,7 @@ public class MainInvaders extends Game {
 		
 		ju1 = new PantallaJug(this);
 		disparo = new Disparo(this);
-		enemigo = new PantallaEnemigo(this);
+		enemigo = new PantallaEnemigo(this, 12);
 		
 		batch = new SpriteBatch();
   

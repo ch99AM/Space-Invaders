@@ -2,32 +2,32 @@ package com.christian.invaders;
 
 public class PantallaEnemigo extends PantallaBase {
 		MainInvaders invaders;
-		
-		private float a, b; //Posicion x y y de los enemigos
+
 		private ListaBase listaEnemigos;
 		
 		
-	public PantallaEnemigo(MainInvaders mainInvaders) {
+	public PantallaEnemigo(MainInvaders mainInvaders, int numE) {
 		// TODO Auto-generated constructor stub
 		super(mainInvaders);
 		this.invaders = mainInvaders;
 		
 		listaEnemigos = new ListaBase();
-		for (int i = 0; i < 10; i++) {
-			listaEnemigos.agregarAlfinal();
+		int a = 1;
+		for (int i = 0; i <= numE; i++) {
+			listaEnemigos.agregarAlfinal(1, a, 600);
+			a += 50;
 		}
 		System.out.println(listaEnemigos.getTamanio());
-		a = 0;
-		b = 500;	
 	}
+	
+	
 	@Override
 	public void render(float delta) {
 		// TODO Auto-generated method stub
-		listaEnemigos.listar(a, b);
-		a += 0.75;
-		b -= 0.50;
+		listaEnemigos.renderLista();
+	}	
 		
-	}
+
 	
 	
 	

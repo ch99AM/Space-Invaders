@@ -4,15 +4,15 @@ import com.badlogic.gdx.graphics.Texture;
 
 public class NaveEnemigo {
 	Texture nave;
-	private int vida;
-	private int x ,y;
+	protected int vida;
+	protected int x ,y;
 	
 
-	public NaveEnemigo(int vida) {
+	public NaveEnemigo(int vida, int x, int y) {
 		nave = new Texture("naveEne.png");
 		this.vida = vida;
 		this.x = x;
-		this.y = y;
+		this.y =y;
 	}
 	public Texture getNave() {
 		return nave;
