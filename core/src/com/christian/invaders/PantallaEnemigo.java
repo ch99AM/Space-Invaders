@@ -2,15 +2,12 @@ package com.christian.invaders;
 
 import com.invaders.enemigos.ListaBase;
 
-public class PantallaEnemigo extends PantallaBase {
-		MainInvaders invaders;
+public class PantallaEnemigo {
 
 		private ListaBase listaEnemigos;
 		
 		
-	public PantallaEnemigo(MainInvaders mainInvaders, int numE) {
-		super(mainInvaders);
-		this.invaders = mainInvaders;
+	public PantallaEnemigo(int numE) {
 		
 		listaEnemigos = new ListaBase();
 		int a = 0;
@@ -21,68 +18,25 @@ public class PantallaEnemigo extends PantallaBase {
 		System.out.println(listaEnemigos.getTamanio());
 	}
 	
-	public void render1(float delta, int x, int y) {
+	public void render(int x, int y) {
 		listaEnemigos.renderLista(x, y);
 	}	
-	
-	
-
-		
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	@Override
-	public void render(float delta) {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	@Override
-	public void show() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void resize(int width, int height) {
-		// TODO Auto-generated method stub
-
-	}
-	
-	@Override
-	public void pause() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void resume() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void hide() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void dispose() {
-		// TODO Auto-generated method stub
-
-	}
-
 }
+	
+
+		
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
