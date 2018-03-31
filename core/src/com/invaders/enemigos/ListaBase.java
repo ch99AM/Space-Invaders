@@ -45,7 +45,7 @@ public class ListaBase {
 	public void mover() {
 		if (inicio != null) {
 			NodoSimple aux = inicio;
-			if (aux.getValor().getX() >= (1140 - getTamanio() * 70)) {
+			if (ultimo().getX() >= 1100) {
 				ext = -1;
 				while (aux != null) {
 					aux.getValor().setY(aux.getValor().getY() - 24);
@@ -60,7 +60,7 @@ public class ListaBase {
 					aux = aux.getSiguiente();
 				}
 				aux = inicio;
-			}
+			}  
 			while (aux != null) {
 				aux.getValor().setX(aux.getValor().getX() + ext);
 				aux = aux.getSiguiente();
@@ -69,7 +69,7 @@ public class ListaBase {
 	}
 
 	public void destruirEnemeigo(int x, int y) {
-			if (x - 20 <= inicio.getValor().getX() && inicio.getValor().getX() <= x + 20
+			if (x - 30 <= inicio.getValor().getX() && inicio.getValor().getX() <= x + 30
 					&& y <= inicio.getValor().getY() && inicio.getValor().getY() <= y + 20) {
 				if (inicio.getSiguiente() == null) {
 					inicio = null;
@@ -77,20 +77,18 @@ public class ListaBase {
 					inicio = inicio.getSiguiente();
 				}
 				Disparo.y = 718;// Banderilla para hacer que disparo desaparesca
-				// this.tamanio --;
+				 this.tamanio --;
 			}
-			 // el bug es que cuando destruyo las hilera desde el medio hacia el principio 
-			// al llegar al pricipio pierdo referencia del anterior porque va a ser null 
-			// por lo tanto no guardo nada.
 			NodoSimple aux = inicio;
 			NodoSimple anterior = inicio;
 			while (aux != null) {
-				if (x-20 <= aux.getValor().getX() && aux.getValor().getX() <= x+20 
+				if (x-30 <= aux.getValor().getX() && aux.getValor().getX() <= x+30 
 						&& y <= aux.getValor().getY() && aux.getValor().getY() <= y+20) {
 					NodoSimple enlace = aux.getSiguiente();
 					anterior.setSiguiente(enlace);
+					
 					Disparo.y = 718; 
-					// this.tamanio --;
+					this.tamanio --;
 					break;
 				}
 				anterior = aux;
@@ -98,7 +96,6 @@ public class ListaBase {
 			}
 
 	}
-	
 	private boolean esVacida() {
 		return inicio == null;
 	}
@@ -107,5 +104,14 @@ public class ListaBase {
 		return tamanio;
 	}
 
-
+	public NaveEnemigo ultimo(){
+		if (inicio != null) {
+			NodoSimple aux = inicio;
+			while (aux.getSiguiente() != null) {
+				aux = aux.getSiguiente();
+			}
+			return aux.getValor();
+		}
+		return null;
+	}
 }
