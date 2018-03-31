@@ -4,40 +4,37 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 
-public class Disparo extends PantallaBase {
-	MainInvaders invaders;
+public class Disparo {
 	
-	private int y;
+	public static int y;
 	private int x;
 	Texture bala;
 	boolean disparado;	
 	
-	public Disparo(MainInvaders mainInvaders) {
-		super(mainInvaders);
-		this.invaders = mainInvaders;
-
-	
+	public Disparo() {
 		bala = new Texture("bala.png");
 		this.y = 700;
 		this.disparado = false;
 	}
+	
 	//@Override
-	public void render(float delta) {		
+	public void render() {		
 		if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
 			this.disparado = true;
 		}
 		
 		if (this.disparado) {
 			MainInvaders.batch.draw(bala, x, y);
-			if (this.y < 700) {
-				this.y += 45 ;
+			if (this.y < 720) {
+				this.y += 24;
 			}
 			else {
 				this.disparado = false;
+				this.x = 0;
+				this.y = 700;
 			}
 		}
 	}
-
 	public void  setX(int x) {
 		if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
 			if ( y >= 700) {
@@ -47,49 +44,118 @@ public class Disparo extends PantallaBase {
 		}
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	@Override
-	public void show() {
-		// TODO Auto-generated method stub
-		
+	public int getY() {
+		return y;
 	}
-	@Override
-	public void resize(int width, int height) {
-		// TODO Auto-generated method stub
-		
+
+	public int getX() {
+		return x;
 	}
-	@Override
-	public void pause() {
-		// TODO Auto-generated method stub
-		
+
+}	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+
+
+
+/*
+public class Disparo extends PantallaBase {
+MainInvaders invaders;
+
+private int y;
+private int x;
+Texture bala;
+boolean disparado;	
+
+public Disparo(MainInvaders mainInvaders) {
+	super(mainInvaders);
+	this.invaders = mainInvaders;
+
+	bala = new Texture("bala.png");
+	this.y = 700;
+	this.disparado = false;
+}
+
+//@Override
+public void render(float delta) {		
+	if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
+		this.disparado = true;
 	}
-	@Override
-	public void resume() {
-		// TODO Auto-generated method stub
-		
+	
+	if (this.disparado) {
+		MainInvaders.batch.draw(bala, x, y);
+		if (this.y < 700) {
+			this.y += 45 ;
+		}
+		else {
+			this.disparado = false;
+		}
 	}
-	@Override
-	public void hide() {
-		// TODO Auto-generated method stub
-		
+}
+
+public void  setX(int x) {
+	if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
+		if ( y >= 700) {
+			this.y = 80;
+			this.x = x + 30;
+		}
 	}
-	@Override
-	public void dispose() {
-		// TODO Auto-generated method stub
-		
-	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@Override
+public void show() {
+	// TODO Auto-generated method stub
 	
 }
+@Override
+public void resize(int width, int height) {
+	// TODO Auto-generated method stub
+	
+}
+@Override
+public void pause() {
+	// TODO Auto-generated method stub
+	
+}
+@Override
+public void resume() {
+	// TODO Auto-generated method stub
+	
+}
+@Override
+public void hide() {
+	// TODO Auto-generated method stub
+	
+}
+@Override
+public void dispose() {
+	// TODO Auto-generated method stub
+	
+}
+
+}
+*/

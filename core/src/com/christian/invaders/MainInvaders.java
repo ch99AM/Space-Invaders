@@ -23,32 +23,34 @@ public class MainInvaders extends Game {
 		fondo = new Texture("Space.jpg");
 		
 		ju1 = new PantallaJug(this);
-		disparo = new Disparo(this);
-		enemigo = new PantallaEnemigo(this, 12);
+		disparo = new Disparo();
+		enemigo = new PantallaEnemigo(this, 10);
 		
 		batch = new SpriteBatch();
   
-		setScreen(disparo);
+
 		setScreen(ju1);
 		setScreen(enemigo);
 	}
 	
 	@Override
 	public void render() {
-		Gdx.gl.glClearColor(1, 1, 1, 1);
+		Gdx.gl.glClearColor(0, 0, 0, 0.15f);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
 		batch.begin();
 		
-		
 		batch.draw(fondo, 0, 0);
 		ju1.render(0);
 		disparo.setX(ju1.getX());
-		disparo.render(0);
-		enemigo.render(0);
+		disparo.render();
 		
+		
+		enemigo.render1(0, disparo.getX(), disparo.getY());
+
 		
 		batch.end();
+
 
 	}
 }	

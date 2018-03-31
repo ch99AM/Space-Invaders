@@ -1,5 +1,7 @@
 package com.christian.invaders;
 
+import com.invaders.enemigos.ListaBase;
+
 public class PantallaEnemigo extends PantallaBase {
 		MainInvaders invaders;
 
@@ -7,25 +9,24 @@ public class PantallaEnemigo extends PantallaBase {
 		
 		
 	public PantallaEnemigo(MainInvaders mainInvaders, int numE) {
-		// TODO Auto-generated constructor stub
 		super(mainInvaders);
 		this.invaders = mainInvaders;
 		
 		listaEnemigos = new ListaBase();
-		int a = 1;
+		int a = 0;
 		for (int i = 0; i <= numE; i++) {
 			listaEnemigos.agregarAlfinal(1, a, 600);
-			a += 50;
+			a += 70;
 		}
 		System.out.println(listaEnemigos.getTamanio());
 	}
 	
-	
-	@Override
-	public void render(float delta) {
-		// TODO Auto-generated method stub
-		listaEnemigos.renderLista();
+	public void render1(float delta, int x, int y) {
+		listaEnemigos.renderLista(x, y);
 	}	
+	
+	
+
 		
 
 	
@@ -42,7 +43,11 @@ public class PantallaEnemigo extends PantallaBase {
 	
 	
 	
-	
+	@Override
+	public void render(float delta) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	@Override
 	public void show() {
@@ -55,7 +60,7 @@ public class PantallaEnemigo extends PantallaBase {
 		// TODO Auto-generated method stub
 
 	}
-
+	
 	@Override
 	public void pause() {
 		// TODO Auto-generated method stub

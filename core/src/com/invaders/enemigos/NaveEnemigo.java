@@ -1,14 +1,14 @@
-package com.christian.invaders;
+package com.invaders.enemigos;
 
 import com.badlogic.gdx.graphics.Texture;
 
 public class NaveEnemigo {
 	Texture nave;
 	protected int vida;
-	protected int x ,y;
+	protected float x ,y;
 	
 
-	public NaveEnemigo(int vida, int x, int y) {
+	public NaveEnemigo(int vida, float x, float y) {
 		nave = new Texture("naveEne.png");
 		this.vida = vida;
 		this.x = x;
@@ -23,16 +23,16 @@ public class NaveEnemigo {
 	public int getVida() {
 		return vida;
 	}
-	public int getX() {
+	public float getX() {
 		return x;
 	}
-	public void setX(int x) {
+	public void setX(float x) {
 		this.x = x;
 	}
-	public int getY() {
+	public float getY() {
 		return y;
 	}
-	public void setY(int y) {
+	public void setY(float y) {
 		this.y = y;
 	}
 }

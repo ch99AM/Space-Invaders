@@ -36,10 +36,10 @@ public class PantallaJug extends PantallaBase {
 		boolean izq = Gdx.input.isKeyPressed(Input.Keys.LEFT);
 		if (der != izq) {
 			if (der == true && x < 1072) {
-				this.x += 7;
+				this.x += 4;
 			}
 			else if(izq == true && x > 0){
-				this.x -= 7;
+				this.x -= 4;
 			}
 		}
 		return x;

@@ -1,10 +1,10 @@
-package com.christian.invaders;
+package com.invaders.enemigos;
 
 public class NodoSimple {
 	NaveEnemigo enemigo;
 	private NodoSimple siguiente;
 
-	public NodoSimple(int vida, int x ,int y) {
+	public NodoSimple(int vida, float x , float y) {
 		this.siguiente = null;
 		enemigo = new NaveEnemigo(vida, x, y);
 	}
