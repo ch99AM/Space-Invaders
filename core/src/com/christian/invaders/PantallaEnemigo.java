@@ -14,7 +14,7 @@ public class PantallaEnemigo {
 		listaBase = new ListaBase();
 		int a = 0; // Contador de posiciones para dibujar a los enemigos
 		for (int i = 0; i <= numE; i++) {
-			listaBase.agregarAlfinal(1, a, 450);
+			listaBase.agregarAlfinal(1, a, 480);
 			a += 70;
 		}
 		listaA  = new ListaA();

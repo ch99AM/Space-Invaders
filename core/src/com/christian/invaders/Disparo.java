@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 
 public class Disparo {
 	
-	public static int y; // para poder terner acceso desde los enemigos para quitar el diparo cuando impacta.
+	public static int y; // para poder terner acceso desde los enemigos para quitar el diparo cuando los impacta.
 	private int x;
 	Texture bala;
 	boolean disparado;	
@@ -24,7 +24,7 @@ public class Disparo {
 		if (this.disparado) {
 			MainInvaders.batch.draw(bala, x, y);
 			if (this.y < 725) {
-				this.y += 24;
+				this.y += 8;
 			}
 			else {
 				this.disparado = false;

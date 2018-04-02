@@ -26,8 +26,8 @@ public class NaveEnemigo {
 	public Texture getNave() {
 		return nave;
 	}
-	public void disminuirVida(int dano) {
-		this.vida -= dano;
+	public void disminuirVida() {
+		this.vida -= 1;
 	}
 	public int getVida() {
 		return vida;

@@ -68,9 +68,10 @@ public class ListaBase {
 	}
 
 	public void destruirEnemeigo(int x, int y) {
-		if (x - 30 <= inicio.getValor().getX() && inicio.getValor().getX() <= x + 30 && y <= inicio.getValor().getY()
+		System.out.println(x);
+		if (x <= inicio.getValor().getX() && inicio.getValor().getX() <= x + 40 && y <= inicio.getValor().getY()
 				&& inicio.getValor().getY() <= y + 10) {
-			inicio.getValor().disminuirVida(1);
+			inicio.getValor().disminuirVida();
 			if (inicio.getValor().getVida() == 0) { 
 				if (inicio.getSiguiente() == null) {
 					inicio = null;
@@ -81,21 +82,23 @@ public class ListaBase {
 			}
 			Disparo.y = 720;// Banderilla para hacer que el disparo desaparesca
 		}
-		NodoSimple aux = inicio;
-		NodoSimple anterior = inicio;
-		while (aux != null) {
-			if (x - 30 <= aux.getValor().getX() && aux.getValor().getX() <= x + 30 && y <= aux.getValor().getY()
-					&& aux.getValor().getY() <= y + 10) {
-				aux.getValor().disminuirVida(1);
-				if (aux.getValor().getVida() == 0) { 
-					NodoSimple enlace = aux.getSiguiente();
-					anterior.setSiguiente(enlace);
-					this.tamanio--;
+		if (tamanio != 1) {
+			NodoSimple aux = inicio;
+			NodoSimple anterior = inicio;
+			while (aux != null) {
+				if (x <= aux.getValor().getX() && aux.getValor().getX() <= x + 40 && y <= aux.getValor().getY()
+						&& aux.getValor().getY() <= y + 10) {
+					aux.getValor().disminuirVida();
+					if (aux.getValor().getVida() == 0) {
+						NodoSimple enlace = aux.getSiguiente();
+						anterior.setSiguiente(enlace);
+						this.tamanio--;
+					}
+					Disparo.y = 720;
 				}
-				Disparo.y = 720;
+				anterior = aux;
+				aux = aux.getSiguiente();
 			}
-			anterior = aux;
-			aux = aux.getSiguiente();
 		}
 	}
 

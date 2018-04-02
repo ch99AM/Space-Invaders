@@ -25,7 +25,7 @@ public class PantallaJuego extends PantallaBase {
 		ju1.renderJugador();
 		disparo.setX(ju1.getX());
 		disparo.render();
-		enemigo.render(disparo.getX(), disparo.getY());
+		enemigo.render(disparo.getX() - 30, disparo.getY());
 
 			
 	}
