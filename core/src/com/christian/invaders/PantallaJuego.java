@@ -15,7 +15,7 @@ public class PantallaJuego extends PantallaBase {
 		
 		ju1 = new Jugador();
 		disparo = new Disparo();
-		enemigo = new PantallaEnemigo(10);
+		enemigo = new PantallaEnemigo(9);
 
 	}
 	

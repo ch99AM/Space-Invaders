@@ -2,14 +2,23 @@ package com.invaders.enemigos;
 
 import com.badlogic.gdx.graphics.Texture;
 
+
+// Es clase se encarga de crear al enemigo base y al jefe.
 public class NaveEnemigo {
 	Texture nave;
 	protected int vida;
 	protected float x ,y;
-	
+	protected  boolean jefe;
 
 	public NaveEnemigo(int vida, float x, float y) {
-		nave = new Texture("naveEne.png");
+		jefe = false;
+		if (vida == 1) {
+			nave = new Texture("naveEne.png");
+		}
+		else {
+			nave = new Texture("naveJefe.png");
+			jefe = true;
+		}
 		this.vida = vida;
 		this.x = x;
 		this.y =y;

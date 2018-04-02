@@ -4,10 +4,10 @@ import com.christian.invaders.Disparo;
 import com.christian.invaders.MainInvaders;
 
 public class ListaBase {
-	private NodoSimple inicio;
-	private int tamanio;
+	protected NodoSimple inicio;
+	protected int tamanio;
 
-	private float velocidad;
+	protected float velocidad;
 
 	public ListaBase() {
 		this.inicio = null;
@@ -17,7 +17,7 @@ public class ListaBase {
 
 	public void agregarAlfinal(int vida, int x, int y) {
 		NodoSimple nuevo = new NodoSimple(vida, x, y);
-		if (esVacida()) {
+		if (esVacida()) {                                                                                                                                                   
 			inicio = nuevo;
 		} else {
 			NodoSimple aux = inicio;
@@ -40,8 +40,7 @@ public class ListaBase {
 			}
 		}
 	}
-
-	private int ext = 1; // bandera que indica si esta en un extremo
+	protected int ext = 1; // bandera que indica si esta en un extremo
 	public void mover() {
 		if (inicio != null) {
 			NodoSimple aux = inicio;
@@ -69,34 +68,38 @@ public class ListaBase {
 	}
 
 	public void destruirEnemeigo(int x, int y) {
-			if (x - 30 <= inicio.getValor().getX() && inicio.getValor().getX() <= x + 30
-					&& y <= inicio.getValor().getY() && inicio.getValor().getY() <= y + 20) {
+		if (x - 30 <= inicio.getValor().getX() && inicio.getValor().getX() <= x + 30 && y <= inicio.getValor().getY()
+				&& inicio.getValor().getY() <= y + 10) {
+			inicio.getValor().disminuirVida(1);
+			if (inicio.getValor().getVida() == 0) { 
 				if (inicio.getSiguiente() == null) {
 					inicio = null;
 				} else {
 					inicio = inicio.getSiguiente();
 				}
-				Disparo.y = 718;// Banderilla para hacer que disparo desaparesca
-				 this.tamanio --;
+				this.tamanio--;
 			}
-			NodoSimple aux = inicio;
-			NodoSimple anterior = inicio;
-			while (aux != null) {
-				if (x-30 <= aux.getValor().getX() && aux.getValor().getX() <= x+30 
-						&& y <= aux.getValor().getY() && aux.getValor().getY() <= y+20) {
+			Disparo.y = 718;// Banderilla para hacer que el disparo desaparesca
+		}
+		NodoSimple aux = inicio;
+		NodoSimple anterior = inicio;
+		while (aux != null) {
+			if (x - 30 <= aux.getValor().getX() && aux.getValor().getX() <= x + 30 && y <= aux.getValor().getY()
+					&& aux.getValor().getY() <= y + 10) {
+				aux.getValor().disminuirVida(1);
+				if (aux.getValor().getVida() == 0) { 
 					NodoSimple enlace = aux.getSiguiente();
 					anterior.setSiguiente(enlace);
-					
-					Disparo.y = 718; 
-					this.tamanio --;
-					break;
+					this.tamanio--;
 				}
-				anterior = aux;
-				aux = aux.getSiguiente();
+				Disparo.y = 718;
 			}
-
+			anterior = aux;
+			aux = aux.getSiguiente();
+		}
 	}
-	private boolean esVacida() {
+
+	public boolean esVacida() {
 		return inicio == null;
 	}
 
