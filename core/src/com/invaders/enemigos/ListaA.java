@@ -8,7 +8,7 @@ public class ListaA extends ListaBase {
 	public ListaA() {
 		super();
 	}
-	//@Override
+	@Override
 	public void renderLista(int x , int y) {
 		if (inicio != null) {
 			destruirEnemeigo(x, y);
@@ -26,7 +26,8 @@ public class ListaA extends ListaBase {
 	public boolean obtenerJefe() {
 		NodoSimple aux = inicio;
 		while (aux != null) {
-			if (aux.getValor().jefe == true) {
+			if (aux.getValor().jefe == true && aux.getValor().vida >= 0) {
+				System.out.println(aux.getValor().vida);
 				return true;
 			}
 			aux = aux.getSiguiente();

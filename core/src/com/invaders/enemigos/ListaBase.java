@@ -79,7 +79,7 @@ public class ListaBase {
 				}
 				this.tamanio--;
 			}
-			Disparo.y = 718;// Banderilla para hacer que el disparo desaparesca
+			Disparo.y = 720;// Banderilla para hacer que el disparo desaparesca
 		}
 		NodoSimple aux = inicio;
 		NodoSimple anterior = inicio;
@@ -92,7 +92,7 @@ public class ListaBase {
 					anterior.setSiguiente(enlace);
 					this.tamanio--;
 				}
-				Disparo.y = 718;
+				Disparo.y = 720;
 			}
 			anterior = aux;
 			aux = aux.getSiguiente();

@@ -15,7 +15,7 @@ public class NaveEnemigo {
 		if (vida == 1) {
 			nave = new Texture("naveEne.png");
 		}
-		else {
+		else {// Con esta vereficacion se puede usar para la lista base y la tipo A
 			nave = new Texture("naveJefe.png");
 			jefe = true;
 		}
