@@ -2,10 +2,9 @@ package com.invaders.enemigos;
 
 import com.christian.invaders.MainInvaders;
 
-public class ListaA extends ListaBase {
+public class EnemigoA extends EnemigoBase {
 
-	
-	public ListaA() {
+	public EnemigoA() {
 		super();
 	}
 	@Override
@@ -16,9 +15,12 @@ public class ListaA extends ListaBase {
 			NodoSimple aux = inicio;
 			if (obtenerJefe()) {
 				while (aux != null) {
-					MainInvaders.batch.draw(aux.getValor().nave, aux.getValor().x, aux.getValor().y);
+					MainInvaders.batch.draw(aux.getEnemigo().nave, aux.getEnemigo().x, aux.getEnemigo().y);
 					aux = aux.getSiguiente();
 				}
+			}
+			else {
+				inicio = null;
 			}
 		}
 		
@@ -26,8 +28,7 @@ public class ListaA extends ListaBase {
 	public boolean obtenerJefe() {
 		NodoSimple aux = inicio;
 		while (aux != null) {
-			if (aux.getValor().jefe == true && aux.getValor().vida >= 0) {
-				System.out.println(aux.getValor().vida);
+			if (aux.getEnemigo().jefe == true && aux.getEnemigo().vida >= 0) {
 				return true;
 			}
 			aux = aux.getSiguiente();

@@ -8,7 +8,7 @@ public class NodoSimple {
 		this.siguiente = null;
 		enemigo = new NaveEnemigo(vida, x, y);
 	}
-	public NaveEnemigo getValor() {
+	public NaveEnemigo getEnemigo() {
 		return enemigo;
 	}
 	public NodoSimple getSiguiente() {
