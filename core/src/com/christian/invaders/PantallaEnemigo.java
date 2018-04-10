@@ -17,18 +17,20 @@ public class PantallaEnemigo {
 		enemigoBase = new EnemigoBase();
 		int a = 0; // Contador de posiciones para dibujar a los enemigos
 		for (int i = 0; i <= numE; i++) {
-			enemigoBase.agregarAlfinal(1, a, 480);
+			enemigoBase.listaEnemigos.agregarAlfinal(1, a, 480);
 			a += 70;
 		}
+		
+		
 		enemigoA  = new EnemigoA();
 		int b = 0; // 
 		int nJefeA = (int) (Math.random() * numE); // saca la posicion del jefe
 		for (int i = 0; i <= numE; i++) {
 			if (i == nJefeA) {
-				enemigoA.agregarAlfinal(4, b, 680);
+				enemigoA.listaEnemigos.agregarAlfinal(4, b, 680);
 			}
 			else {
-				enemigoA.agregarAlfinal(1, b, 680);
+				enemigoA.listaEnemigos.agregarAlfinal(1, b, 680);
 			}
 			b +=70;
 		}
@@ -44,12 +46,13 @@ public class PantallaEnemigo {
 			}
 			c += 70;
 		}
+		
 	}
 	
 	public void render(int x, int y) {
 		enemigoBase.renderLista(x, y);
 		enemigoA.renderLista(x, y);
-		enemigoB.renderLista(x, y);
+		//enemigoB.renderLista(x, y);
 	}	
 }
 	

@@ -2,6 +2,7 @@ package com.invaders.enemigos;
 
 import com.christian.invaders.Disparo;
 import com.christian.invaders.MainInvaders;
+import com.invaders.listas.NodoDoble;
 
 public class EnemigoB {
 	private NodoDoble inicio;
@@ -28,7 +29,7 @@ public class EnemigoB {
 	public void renderLista(int x, int y) {
 		if (inicio != null) {
 			destruirEnemeigo(x, y);
-			//moverJefe( (int) (Math.random() * getTamano()));
+			moverJefe( (int) (Math.random() * getTamano()));
 			mover();
 			NodoDoble aux = inicio;
 			if (obtenerJefe() == true) {
@@ -124,13 +125,11 @@ public class EnemigoB {
 	}
 
 	public void moverJefe(int pJefe) {
-		System.out.println(pJefe);
 		NodoDoble aux = inicio;
 		NodoDoble jefe = null;
 		while (jefe == null) {
 			if (aux.getEnemigo().jefe == true) {
 				jefe = aux;
-				System.out.println(jefe);
 				jefe.setAnterior(null); // Limpio las referencias
 				jefe.setSiguiente(null); //
 				if (aux.getAnterior() != null) {

@@ -1,20 +1,27 @@
 package com.invaders.enemigos;
 
-import com.christian.invaders.Disparo;
+
 import com.christian.invaders.MainInvaders;
+import com.invaders.listas.ListaBase;
+import com.invaders.listas.NodoSimple;
 
 public class EnemigoBase {
-	protected NodoSimple inicio;
-	protected int tamano;
+	
+	//protected NodoSimple inicio;
+	//protected int tamano;
 
+	public ListaBase listaEnemigos;
 	protected float velocidad;
 
 	public EnemigoBase() {
-		this.inicio = null;
-		this.tamano = 0;
+		listaEnemigos = new ListaBase();
+		
+		//this.inicio = null;
+		//this.tamano = 0;
 		// velocidad = 0.25; velocidad a la que se va a mover la nave
 	}
 
+	/*
 	public void agregarAlfinal(int vida, int x, int y) {
 		NodoSimple nuevo = new NodoSimple(vida, x, y);
 		if (esVacida()) {                                                                                                                                                   
@@ -28,12 +35,12 @@ public class EnemigoBase {
 		}
 		tamano++;
 	}
-
+*/
 	public void renderLista(int x, int y) {
-		if (inicio != null) {
+		if (listaEnemigos.getInicio() != null) {
 			destruirEnemeigo(x, y);
 			mover();
-			NodoSimple aux = inicio;
+			NodoSimple aux = listaEnemigos.getInicio();
 			while (aux != null) {
 				MainInvaders.batch.draw(aux.getEnemigo().nave, aux.getEnemigo().x, aux.getEnemigo().y);
 				aux = aux.getSiguiente();
@@ -42,15 +49,15 @@ public class EnemigoBase {
 	}
 	protected int ext = 1; // bandera que indica si esta en un extremo
 	public void mover() {
-		if (inicio != null) {
-			NodoSimple aux = inicio;
-			if (ultimo().getX() >= 1100) {
+		if (listaEnemigos.getInicio() != null) {
+			NodoSimple aux = listaEnemigos.getInicio();
+			if (listaEnemigos.ultimo().getX() >= 1100) {
 				ext = -1;
 				while (aux != null) {
 					aux.getEnemigo().setY(aux.getEnemigo().getY() - 24);
 					aux = aux.getSiguiente();
 				}
-				aux = inicio;
+				aux = listaEnemigos.getInicio();
 			}
 			if (aux.getEnemigo().getX() <= 0) {
 				ext = 1;
@@ -58,7 +65,7 @@ public class EnemigoBase {
 					aux.getEnemigo().setY(aux.getEnemigo().getY() - 24);
 					aux = aux.getSiguiente();
 				}
-				aux = inicio;
+				aux = listaEnemigos.getInicio();
 			}  
 			while (aux != null) {
 				aux.getEnemigo().setX(aux.getEnemigo().getX() + ext);
@@ -68,16 +75,18 @@ public class EnemigoBase {
 	}
 
 	public void destruirEnemeigo(int x, int y) {
-		if (x <= inicio.getEnemigo().getX() && inicio.getEnemigo().getX() <= x + 40 && y <= inicio.getEnemigo().getY()
-				&& inicio.getEnemigo().getY() <= y + 10) {
-			inicio.getEnemigo().disminuirVida();
-			if (inicio.getEnemigo().getVida() == 0) { 
-				if (inicio.getSiguiente() == null) {
-					inicio = null;
+		listaEnemigos.eliminarNodo(x, y);
+		/*
+		if (x <= listaEnemigos.getInicio().getEnemigo().getX() && listaEnemigos.getInicio().getEnemigo().getX() <= x + 40 &&
+				y <= listaEnemigos.getInicio().getEnemigo().getY() && listaEnemigos.getInicio().getEnemigo().getY() <= y + 10) {
+			listaEnemigos.getInicio().getEnemigo().disminuirVida();
+			if (listaEnemigos.getInicio().getEnemigo().getVida() == 0) { 
+				if (listaEnemigos.getInicio().getSiguiente() == null) {
+					listaEnemigos.setInicio(null);
 				} else {
-					inicio = inicio.getSiguiente();
+					listaEnemigos.setInicio(listaEnemigos.getInicio().getSiguiente());
 				}
-				this.tamano--;
+				listaEnemigos.setTamano(-1);
 			}
 			Disparo.y = 720;// Banderilla para hacer que el disparo desaparesca
 		}
@@ -99,8 +108,8 @@ public class EnemigoBase {
 				aux = aux.getSiguiente();
 			}
 		}
-	}
-
+	*/}
+/*
 	public boolean esVacida() {
 		return inicio == null;
 	}
@@ -108,7 +117,8 @@ public class EnemigoBase {
 	public int getTamano() {
 		return tamano;
 	}
-
+*/
+	/*
 	public NaveEnemigo ultimo(){
 		if (inicio != null) {
 			NodoSimple aux = inicio;
@@ -118,5 +128,5 @@ public class EnemigoBase {
 			return aux.getEnemigo();
 		}
 		return null;
-	}
+	}*/
 }

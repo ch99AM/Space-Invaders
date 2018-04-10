@@ -1,4 +1,6 @@
-package com.invaders.enemigos;
+package com.invaders.listas;
+
+import com.invaders.enemigos.NaveEnemigo;
 
 public class NodoDoble  {
 	NaveEnemigo enemigo;
