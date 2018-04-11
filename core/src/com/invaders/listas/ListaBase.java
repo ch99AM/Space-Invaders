@@ -27,6 +27,7 @@ public class ListaBase {
 		tamano++;
 	}
 	
+	//Elimina a un nodo por el valores de posicion que se encuentran ahi
 	public void eliminarNodo(int x, int y) {
 		//Validacion por si es el primero 
 		if (x <= inicio.getEnemigo().getX() && inicio.getEnemigo().getX() <= x + 40 &&
@@ -41,10 +42,11 @@ public class ListaBase {
 				this.tamano --;
 			}
 			Disparo.y = 720;// Banderilla para hacer que el disparo desaparesca
+		
 		}
 		else {
 			if (tamano != 1) {
-				NodoSimple destruir = BuscarNodo(x, y); // Busco el enemgio anterior al que quiero destruir
+				NodoSimple destruir = buscarNodo(x, y); // Busco el enemgio anterior al que quiero destruir
 				if (destruir != null) {
 					destruir.getSiguiente().getEnemigo().disminuirVida();
 					if (destruir.getSiguiente().getEnemigo().getVida() == 0) {
@@ -57,8 +59,12 @@ public class ListaBase {
 		}
 	}
 	
-	// Busca nodos segun las coordenadas del la nave
-	public NodoSimple BuscarNodo(int x , int y) {
+	/**
+	 * @param x  posicion del nave que contiene 
+	 * @param y  el nodo
+	 * @return La posicion del nodo
+	 */
+	public NodoSimple buscarNodo(int x , int y) {
 		NodoSimple aux = inicio;
 		while (aux.getSiguiente() != null) {
 			if (x <= aux.getSiguiente().getEnemigo().getX() && aux.getSiguiente().getEnemigo().getX() <= x + 40 &&
@@ -69,6 +75,19 @@ public class ListaBase {
 		}
 		return null;
 	}
+	/*
+	// Busca nodo por posicion
+	public NodoSimple buscarNumNodo(int numNodo) {
+		NodoSimple aux = inicio;
+		if (0 >= numNodo && numNodo <= tamano) {
+			int cont = 0;
+			while(cont != numNodo) {
+				cont++;
+				aux.getSiguiente();
+			}
+		}
+		return aux;
+	}*/
 	// Devuelve la nave en la ultima posicion
 	public NaveEnemigo ultimo(){
 		if (inicio != null) {
@@ -89,16 +108,13 @@ public class ListaBase {
 		return tamano;
 	}
 	
-	public void setTamano(int tamano) {
-		this.tamano = tamano;
-	}
-	
 	public NodoSimple getInicio() {
 		return inicio;
 	}
 
-	public void setInicio(NodoSimple inicio) {
-		this.inicio = inicio;
+	public void setInicio(NodoSimple valor) {
+		inicio = valor;
+		
 	}
 	
 }

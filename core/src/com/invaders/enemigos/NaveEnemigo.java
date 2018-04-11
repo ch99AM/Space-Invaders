@@ -44,4 +44,9 @@ public class NaveEnemigo {
 	public void setY(float y) {
 		this.y = y;
 	}
+	public void modEnemigo() {
+		this.nave = new Texture("naveJefe.png");
+		this.vida = 3;
+		this.jefe = true;
+	}
 }
