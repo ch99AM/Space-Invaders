@@ -4,9 +4,21 @@ import com.christian.invaders.MainInvaders;
 import com.invaders.listas.NodoSimple;
 
 public class EnemigoA extends EnemigoBase {
-
-	public EnemigoA() {
-		super();
+	
+	
+	public EnemigoA(int numE) {
+		super(-10);
+		int b = 0; // 
+		int nJefeA = (int) (Math.random() * numE); // saca la posicion del jefe
+		for (int i = 0; i <= numE; i++) {
+			if (i == nJefeA) {
+				listaEnemigos.agregarAlfinal(4, b, 680);
+			}
+			else {
+				listaEnemigos.agregarAlfinal(1, b, 680);
+			}
+			b +=70;
+		}
 	}
 	
 	@Override
@@ -36,6 +48,9 @@ public class EnemigoA extends EnemigoBase {
 			aux = aux.getSiguiente();
 		}
 		return false;
+	}
+	public boolean existo() {
+		return listaEnemigos.getInicio() != null;
 	}
 }
 

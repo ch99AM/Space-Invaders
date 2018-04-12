@@ -9,6 +9,4 @@ public abstract class PantallaBase implements Screen {
 	{
 		this.invaders = invaders;
 	}
-	
-
 }

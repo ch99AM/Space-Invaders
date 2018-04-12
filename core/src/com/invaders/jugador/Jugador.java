@@ -10,14 +10,12 @@ public class Jugador {
 	Texture naveJ;
 	private int x;
 	private int puntaje;
-	private String nombre;
 	private int vida;
 
 	public Jugador() {
 		this.x = 545;
 		naveJ = new Texture("naveJugador.png");
 		this.vida = 3;
-		this.nombre = "Christian";
 		this.puntaje = 0;
 	}
 

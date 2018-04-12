@@ -4,11 +4,23 @@ import com.christian.invaders.MainInvaders;
 import com.invaders.listas.ListaCircular;
 import com.invaders.listas.NodoSimple;
 
-public class EnemigoC {
-	public ListaCircular listaC;
+public class EnemigoC extends EnemigoAbstract{
+	private ListaCircular listaC;
 	
-	public EnemigoC() {
+	public EnemigoC(int numE) {
 		listaC = new ListaCircular();
+		
+		int d = 0; // 
+		int nJefeC = (int) (Math.random() * numE); // saca la posicion del jefe
+		for (int i = 0; i <= numE; i++) {
+			if (i == nJefeC) {
+				listaC.agregarAlFinal(3, d, 680);
+			}
+			else {
+				listaC.agregarAlFinal(1, d, 680);
+			}
+			d += 70;
+		}
 	}
 	public void renderLista(int x , int y) {
 		int posicion = listaC.buscarNodo(x, y);
@@ -46,7 +58,7 @@ public class EnemigoC {
 			if (listaC.getUltimo().getEnemigo().getX() >= 1100) {
 				ext = -1;
 				for (int i = 0; i < listaC.getTamano(); i++) {
-					aux.getEnemigo().setY(aux.getEnemigo().getY() - 24);
+					aux.getEnemigo().setY(aux.getEnemigo().getY() - 32);
 					aux = aux.getSiguiente();
 				}
 				aux = listaC.getInicio();
@@ -54,7 +66,7 @@ public class EnemigoC {
 			if (aux.getEnemigo().getX() <= 0) {
 				ext = 1;
 				for (int i = 0; i < listaC.getTamano(); i++) {
-					aux.getEnemigo().setY(aux.getEnemigo().getY() - 24);
+					aux.getEnemigo().setY(aux.getEnemigo().getY() - 32);
 					aux = aux.getSiguiente();
 				}
 				aux = listaC.getInicio();
@@ -64,5 +76,8 @@ public class EnemigoC {
 				aux = aux.getSiguiente();
 			}
 		}
+	}
+	public boolean existo() {
+		return listaC.getInicio() != null;
 	}
 }

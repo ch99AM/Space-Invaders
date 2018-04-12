@@ -2,6 +2,8 @@ package com.christian.invaders;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.Files.FileType;
 import com.badlogic.gdx.graphics.Texture;
 
 public class Disparo {
@@ -10,11 +12,13 @@ public class Disparo {
 	private int x;
 	Texture bala;
 	boolean disparado;	
+	private Sound shoot;
 	
 	public Disparo() {
 		bala = new Texture("bala.png");
 		this.y = 700;
 		this.disparado = false;
+		shoot = Gdx.audio.newSound( Gdx.files.getFileHandle("Sounds/Shoot.wav", FileType.Internal) );
 	}
 	public void render() {		
 		if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
@@ -24,7 +28,7 @@ public class Disparo {
 		if (this.disparado) {
 			MainInvaders.batch.draw(bala, x, y);
 			if (this.y < 725) {
-				this.y += 8;
+				this.y += 16;
 			}
 			else {
 				this.disparado = false;
@@ -36,6 +40,7 @@ public class Disparo {
 	public void  setX(int x) {
 		if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
 			if ( y >= 700) {
+				shoot.play();
 				this.y = 80;
 				this.x = x + 30;
 			}

@@ -12,7 +12,7 @@ public class NaveEnemigo {
 
 	public NaveEnemigo(int vida, float x, float y) {
 		jefe = false;
-		if (vida == 1) {
+		if (vida < 4) {
 			nave = new Texture("naveEne.png");
 		}
 		else {// Con esta vereficacion se puede usar para la lista base y la tipo A
@@ -32,6 +32,9 @@ public class NaveEnemigo {
 	public int getVida() {
 		return vida;
 	}
+	public void setVida(int vida) {
+		this.vida = vida;
+	}
 	public float getX() {
 		return x;
 	}
@@ -46,7 +49,7 @@ public class NaveEnemigo {
 	}
 	public void modEnemigo() {
 		this.nave = new Texture("naveJefe.png");
-		this.vida = 3;
+		this.vida = 4;
 		this.jefe = true;
 	}
 }

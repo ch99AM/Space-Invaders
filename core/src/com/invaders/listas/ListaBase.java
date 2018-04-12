@@ -27,13 +27,12 @@ public class ListaBase {
 		tamano++;
 	}
 	
-	//Elimina a un nodo por el valores de posicion que se encuentran ahi
-	public void eliminarNodo(int x, int y) {
+	//Elimina un nodo por la posicion en la que se encuentra.
+	public void eliminarNodo(int posicion) {
 		//Validacion por si es el primero 
-		if (x <= inicio.getEnemigo().getX() && inicio.getEnemigo().getX() <= x + 40 &&
-				y <= inicio.getEnemigo().getY() && inicio.getEnemigo().getY() <= y + 10) {
+		if (posicion == 0) {
 			inicio.getEnemigo().disminuirVida();
-			if (inicio.getEnemigo().getVida() == 0) {// Por si el jefe esta de primero y su vida no es cero 
+			if (inicio.getEnemigo().getVida() == 0) {
 				if (inicio.getSiguiente() == null) {
 					inicio = null;;
 				} else {
@@ -41,53 +40,43 @@ public class ListaBase {
 				}
 				this.tamano --;
 			}
-			Disparo.y = 720;// Banderilla para hacer que el disparo desaparesca
 		
 		}
 		else {
-			if (tamano != 1) {
-				NodoSimple destruir = buscarNodo(x, y); // Busco el enemgio anterior al que quiero destruir
-				if (destruir != null) {
-					destruir.getSiguiente().getEnemigo().disminuirVida();
-					if (destruir.getSiguiente().getEnemigo().getVida() == 0) {
-						destruir.setSiguiente(destruir.getSiguiente().getSiguiente());
+			if (posicion > 0 && posicion <= tamano) {
+				NodoSimple aux = inicio;
+				for (int i = 1; i < posicion; i++ ) {
+					aux = aux.getSiguiente();
+				}
+				aux.getSiguiente().getEnemigo().disminuirVida();
+					if (aux.getSiguiente().getEnemigo().getVida() == 0) {
+						aux.setSiguiente(aux.getSiguiente().getSiguiente());
 						this.tamano--;
 					}
-					Disparo.y = 720;
-				}
 			}
 		}
+
 	}
 	
 	/**
-	 * @param x  posicion del nave que contiene 
-	 * @param y  el nodo
-	 * @return La posicion del nodo
+	 * @param x   Parametros de busqueda,
+	 * @param y    coordenadas en la pantalla
+	 * @return  La posicion del nodo
 	 */
-	public NodoSimple buscarNodo(int x , int y) {
+	public int  buscarNodo(int x , int y) {
+		int posicion = 0;
 		NodoSimple aux = inicio;
-		while (aux.getSiguiente() != null) {
-			if (x <= aux.getSiguiente().getEnemigo().getX() && aux.getSiguiente().getEnemigo().getX() <= x + 40 &&
-					y <= aux.getSiguiente().getEnemigo().getY() && aux.getSiguiente().getEnemigo().getY() <= y + 10) {
-			return 	aux;
+		while (aux != null) {
+			if (x <= aux.getEnemigo().getX() && aux.getEnemigo().getX() <= x + 40 &&
+					y <= aux.getEnemigo().getY() && aux.getEnemigo().getY() <= y + 10) {
+			return 	posicion;
 			}
+			posicion ++;
 			aux = aux.getSiguiente();
 		}
-		return null;
+		return -2;// indica que no hay nadie en esa posicion.
 	}
-	/*
-	// Busca nodo por posicion
-	public NodoSimple buscarNumNodo(int numNodo) {
-		NodoSimple aux = inicio;
-		if (0 >= numNodo && numNodo <= tamano) {
-			int cont = 0;
-			while(cont != numNodo) {
-				cont++;
-				aux.getSiguiente();
-			}
-		}
-		return aux;
-	}*/
+	
 	// Devuelve la nave en la ultima posicion
 	public NaveEnemigo ultimo(){
 		if (inicio != null) {
@@ -116,5 +105,4 @@ public class ListaBase {
 		inicio = valor;
 		
 	}
-	
 }

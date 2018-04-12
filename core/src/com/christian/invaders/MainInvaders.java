@@ -1,55 +1,49 @@
 package com.christian.invaders;
 
+import com.badlogic.gdx.Files.FileType;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 
 public class MainInvaders extends Game {
+	
+	
+	private Music music;
 
-	PantallaJuego juego;
-	//Disparo disparo;
-	//PantallaEnemigo enemigo;
-	Texture fondo;
+	//PantallaJuego juego;
+	//Texture fondo;
+	
+	Menu menu;
 	
 	public static SpriteBatch batch; // Para facilitar el dibujar figuras del juego
 
 	@Override
 	public void create () {
 		
-		fondo = new Texture("Space.jpg");
+		music = Gdx.audio.newMusic(Gdx.files.getFileHandle("Game.wav", FileType.Internal));
+		music.setVolume(0.5f);
+		music.play(); 
+		music.setLooping(true);
 		
-		juego = new PantallaJuego(this);
-		//disparo = new Disparo();
-		//enemigo = new PantallaEnemigo(this, 10);
+		//juego = new PantallaJuego(this);
+		menu = new Menu(this);
 		
 		batch = new SpriteBatch();
-  
-
-		setScreen(juego);
-		//setScreen(enemigo);
+		
+		setScreen(menu);
 	}
-	
 	@Override
-	public void render() {
-		Gdx.gl.glClearColor(0, 0, 0, 0.15f);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		
-		batch.begin();
-		
-		batch.draw(fondo, 0, 0);
-		juego.render(0);
-		//disparo.setX(ju1.getX());
-		//disparo.render();
-		
-		
-		//enemigo.render1(0, disparo.getX(), disparo.getY());
-
-		batch.end();
-
-
+	public void pause() {
+		music.pause();
+	}
+	@Override
+	public void resume() {
+		music.play(); 
 	}
 }	
 

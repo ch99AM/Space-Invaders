@@ -1,41 +1,31 @@
 package com.invaders.enemigos;
 
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Files.FileType;
+import com.badlogic.gdx.audio.Sound;
+import com.christian.invaders.Disparo;
 import com.christian.invaders.MainInvaders;
 import com.invaders.listas.ListaBase;
 import com.invaders.listas.NodoSimple;
 
-public class EnemigoBase {
-	
-	//protected NodoSimple inicio;
-	//protected int tamano;
+public class EnemigoBase extends EnemigoAbstract {
 
-	public ListaBase listaEnemigos;
+	protected ListaBase listaEnemigos;
 	protected float velocidad;
+	protected Sound destruido;
 
-	public EnemigoBase() {
+	public EnemigoBase(int numE) {
 		listaEnemigos = new ListaBase();
+		destruido = Gdx.audio.newSound( Gdx.files.getFileHandle("Sounds/StarGame.wav", FileType.Internal));
 		
-		//this.inicio = null;
-		//this.tamano = 0;
-		// velocidad = 0.25; velocidad a la que se va a mover la nave
+		int a = 0; // Contador de posiciones para dibujar a los enemigos
+		for (int i = 0; i <= numE; i++) {
+			listaEnemigos.agregarAlfinal(1, a, 680);
+			a += 70;
+		}		
 	}
 
-	/*
-	public void agregarAlfinal(int vida, int x, int y) {
-		NodoSimple nuevo = new NodoSimple(vida, x, y);
-		if (esVacida()) {                                                                                                                                                   
-			inicio = nuevo;
-		} else {
-			NodoSimple aux = inicio;
-			while (aux.getSiguiente() != null) {
-				aux = aux.getSiguiente();
-			}
-			aux.setSiguiente(nuevo);
-		}
-		tamano++;
-	}
-*/
 	public void renderLista(int x, int y) {
 		if (listaEnemigos.getInicio() != null) {
 			destruirEnemeigo(x, y);
@@ -54,7 +44,7 @@ public class EnemigoBase {
 			if (listaEnemigos.ultimo().getX() >= 1100) {
 				ext = -1;
 				while (aux != null) {
-					aux.getEnemigo().setY(aux.getEnemigo().getY() - 24);
+					aux.getEnemigo().setY(aux.getEnemigo().getY() - 32);
 					aux = aux.getSiguiente();
 				}
 				aux = listaEnemigos.getInicio();
@@ -62,7 +52,7 @@ public class EnemigoBase {
 			if (aux.getEnemigo().getX() <= 0) {
 				ext = 1;
 				while (aux != null) {
-					aux.getEnemigo().setY(aux.getEnemigo().getY() - 24);
+					aux.getEnemigo().setY(aux.getEnemigo().getY() - 32);
 					aux = aux.getSiguiente();
 				}
 				aux = listaEnemigos.getInicio();
@@ -75,58 +65,15 @@ public class EnemigoBase {
 	}
 
 	public void destruirEnemeigo(int x, int y) {
-		listaEnemigos.eliminarNodo(x, y);
-		/*
-		if (x <= listaEnemigos.getInicio().getEnemigo().getX() && listaEnemigos.getInicio().getEnemigo().getX() <= x + 40 &&
-				y <= listaEnemigos.getInicio().getEnemigo().getY() && listaEnemigos.getInicio().getEnemigo().getY() <= y + 10) {
-			listaEnemigos.getInicio().getEnemigo().disminuirVida();
-			if (listaEnemigos.getInicio().getEnemigo().getVida() == 0) { 
-				if (listaEnemigos.getInicio().getSiguiente() == null) {
-					listaEnemigos.setInicio(null);
-				} else {
-					listaEnemigos.setInicio(listaEnemigos.getInicio().getSiguiente());
-				}
-				listaEnemigos.setTamano(-1);
-			}
-			Disparo.y = 720;// Banderilla para hacer que el disparo desaparesca
+		int posicion = listaEnemigos.buscarNodo(x, y);
+		if (posicion != -2) {
+			listaEnemigos.eliminarNodo(posicion);
+			Disparo.y = 720;
+			destruido.play();
 		}
-		if (tamano != 1) {
-			NodoSimple aux = inicio;
-			NodoSimple anterior = inicio;
-			while (aux != null) {
-				if (x <= aux.getEnemigo().getX() && aux.getEnemigo().getX() <= x + 40 && y <= aux.getEnemigo().getY()
-						&& aux.getEnemigo().getY() <= y + 10) {
-					aux.getEnemigo().disminuirVida();
-					if (aux.getEnemigo().getVida() == 0) {
-						NodoSimple enlace = aux.getSiguiente();
-						anterior.setSiguiente(enlace);
-						this.tamano--;
-					}
-					Disparo.y = 720;
-				}
-				anterior = aux;
-				aux = aux.getSiguiente();
-			}
-		}
-	*/}
-/*
-	public boolean esVacida() {
-		return inicio == null;
+	}
+	public boolean existo() {
+		return listaEnemigos.getInicio() != null;
 	}
 
-	public int getTamano() {
-		return tamano;
-	}
-*/
-	/*
-	public NaveEnemigo ultimo(){
-		if (inicio != null) {
-			NodoSimple aux = inicio;
-			while (aux.getSiguiente() != null) {
-				aux = aux.getSiguiente();
-			}
-			return aux.getEnemigo();
-		}
-		return null;
-	}*/
 }
