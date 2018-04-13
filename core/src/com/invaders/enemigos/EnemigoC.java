@@ -5,6 +5,7 @@ import com.invaders.listas.ListaCircular;
 import com.invaders.listas.NodoSimple;
 
 public class EnemigoC extends EnemigoAbstract{
+	
 	private ListaCircular listaC;
 	
 	public EnemigoC(int numE) {
@@ -78,6 +79,6 @@ public class EnemigoC extends EnemigoAbstract{
 		}
 	}
 	public boolean existo() {
-		return listaC.getInicio() != null;
+		return listaC.getTamano() != 0;
 	}
 }

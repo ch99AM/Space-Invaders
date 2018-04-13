@@ -84,14 +84,14 @@ public class ListaCircular {
 	public void editarNodo(int posicion) {
 		if (posicion >= 0 && posicion < tamano ) {
 			if (posicion == 0) {
-				inicio.getEnemigo().modEnemigo();
+				inicio.getEnemigo().coverJefe();
 			}
 			else {
 				NodoSimple aux = inicio;
 				for (int i = 0; i <= posicion; i++) {
 					aux = aux.getSiguiente();
 				}
-				aux.getEnemigo().modEnemigo();
+				aux.getEnemigo().coverJefe();
 			}
 		}
 	}

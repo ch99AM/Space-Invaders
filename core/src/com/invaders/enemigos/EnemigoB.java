@@ -1,55 +1,48 @@
 package com.invaders.enemigos;
 
 
+import com.christian.invaders.Disparo;
 import com.christian.invaders.MainInvaders;
 import com.invaders.listas.ListaDoble;
 import com.invaders.listas.NodoDoble;
 
-public class EnemigoB {
+public class EnemigoB extends EnemigoAbstract {
+	
 	public ListaDoble listaB;
+	private int tiempo;
 	
-	/*
-	private NodoDoble inicio;
-	private int tamano;
-	*/
-	public EnemigoB() {
+	
+	public EnemigoB(int numE) {
+		tiempo = 0;
 		listaB = new ListaDoble();
-		/*
-		this.inicio = null;
-		this.tamano = 0;*/
-	}/*
-	public void agregarAlfinal(int vida, int x, int y) {
-		NodoDoble nuevo = new NodoDoble(vida, x, y);
-		if (esVacida()) {                                                                                                                                                   
-			inicio = nuevo;
-		} else {
-			NodoDoble aux = inicio;
-			while (aux.getSiguiente() != null) {
-				aux = aux.getSiguiente();
-			}
-			aux.setSiguiente(nuevo);
-			nuevo.setAnterior(aux);
-		}
-		tamano++;
-	}*/
-	
-	public void renderLista(int x, int y) {
-		NodoDoble inicio = listaB.getInicio();
-		if (inicio != null && verificarJefe()) {
-			//moverJefe( (int) (Math.random() * (listaB.getTamano() - 1)));
-			destruirEnemeigo(x, y);
-			mover();
-			NodoDoble aux = inicio;
-			if (verificarJefe() == true) {
-				while (aux != null) {
-					MainInvaders.batch.draw(aux.getEnemigo().nave, aux.getEnemigo().x, aux.getEnemigo().y);
-					aux = aux.getSiguiente();
-				}
+		int b = 0; // 
+		int nJefeB = (int) (Math.random() * numE); // saca la posicion del jefe
+		for (int i = 0; i <= numE; i++) {
+			if (i == nJefeB) {
+				listaB.agregarAlfinal(4, b, 680);
 			}
 			else {
-				inicio = null;
+				listaB.agregarAlfinal(1, b, 680);
+			}
+			b += 70;
+		}
+	}
+
+	public void renderLista(int x, int y) {
+		destruirEnemeigo(x, y);
+		NodoDoble inicio = listaB.getInicio();
+		if (inicio != null && verificarJefe()) {
+			if (tiempo % 50 == 0) {
+				moverJefe((int) (Math.random() * listaB.getTamano()));
+			}
+			mover();
+			NodoDoble aux = inicio;
+			while (aux != null) {
+				MainInvaders.batch.draw(aux.getEnemigo().nave, aux.getEnemigo().x, aux.getEnemigo().y);
+				aux = aux.getSiguiente();
 			}
 		}
+		tiempo++;
 	}
 	
 	protected int ext = 1; // bandera que indica si esta en un extremo
@@ -60,7 +53,7 @@ public class EnemigoB {
 			if (listaB.ultimo().getEnemigo().getX() >= 1100) {
 				ext = -1;
 				while (aux != null) {
-					aux.getEnemigo().setY(aux.getEnemigo().getY() - 24);
+					aux.getEnemigo().setY(aux.getEnemigo().getY() - 32);
 					aux = aux.getSiguiente();
 				}
 				aux = inicio;
@@ -68,7 +61,7 @@ public class EnemigoB {
 			if (aux.getEnemigo().getX() <= 0) {
 				ext = 1;
 				while (aux != null) {
-					aux.getEnemigo().setY(aux.getEnemigo().getY() - 24);
+					aux.getEnemigo().setY(aux.getEnemigo().getY() - 32);
 					aux = aux.getSiguiente();
 				}
 				aux = inicio;
@@ -81,83 +74,47 @@ public class EnemigoB {
 	}
 
 	public void destruirEnemeigo(int x, int y) {
-		listaB.eliminarNodo(x, y);
-		/*
-		NodoDoble inicio = listaB.getInicio();
-		if (x <= inicio.getEnemigo().getX() && inicio.getEnemigo().getX() <= x + 40 && y <= inicio.getEnemigo().getY()
-				&& inicio.getEnemigo().getY() <= y + 10) {
-			inicio.getEnemigo().disminuirVida();
-			if (inicio.getEnemigo().getVida() == 0) { 
-				if (inicio.getSiguiente() == null) {
-					inicio = null;
-				} else {
-					inicio = inicio.getSiguiente();
-					inicio.setAnterior(null);
-				}
-				listaB.setTamano(-1);
+		if (listaB.getInicio() != null) {
+			int posicion = listaB.buscarNodo(x, y);
+			if (posicion != -2) {
+				listaB.eliminarNodo(posicion);;
+				Disparo.y = 720;
 			}
-			Disparo.y = 720;// Banderilla para hacer que el disparo desaparesca
+			if (!verificarJefe()) {
+				listaB.setInicio(null);
+			}
 		}
-		if (listaB.getTamano() != 1) {
-			NodoDoble aux = inicio;
-			while (aux != null) {
-				if (x <= aux.getEnemigo().getX() && aux.getEnemigo().getX() <= x + 40 && y <= aux.getEnemigo().getY()
-						&& aux.getEnemigo().getY() <= y + 10) {
-					aux.getEnemigo().disminuirVida();
-					if (aux.getEnemigo().getVida() == 0) {
-						aux.getAnterior().setSiguiente(aux.getSiguiente());
-						if (aux.getSiguiente() != null) {
-							aux.getSiguiente().setAnterior(aux.getAnterior());
-						}
-						listaB.setTamano(-1);
-					}
-					Disparo.y = 720;
-				}
-				aux = aux.getSiguiente();
-			}
-		}*/
 	}
 	
 	public void moverJefe(int pJefe) {
-		NodoDoble jefe = obtenerJefe(); 
-		NodoDoble aux = listaB.getInicio();
-		int p = 0; // Posicion en la que va a quedar el jefe
-		while (p != pJefe) {
-			p++;
-			aux.getSiguiente();
+		if (pJefe < listaB.getTamano()) {
+			int vidaJefe = obtenerJefe(); 
+			NodoDoble aux = listaB.getInicio();
+			for (int i = 0; i < pJefe; i++) {
+				aux = aux.getSiguiente();
+			}
+			if (pJefe == 0) {
+				listaB.getInicio().getEnemigo().coverJefe();
+				listaB.getInicio().getEnemigo().setVida(vidaJefe);
+			}
+			else {
+				aux.getEnemigo().coverJefe();
+				aux.getEnemigo().setVida(vidaJefe);
+			}
 		}
-		if (p == 0) {
-			aux.setAnterior(jefe);
-			jefe.setSiguiente(aux);
-		}
-		if (p == (listaB.getTamano() - 1)) {
-			aux.setSiguiente(jefe);
-			jefe.setAnterior(aux);
-		} /*
-		else if  (p < listaB.getTamano() && p > 0){
-			jefe.setAnterior(aux.getAnterior());
-			jefe.setSiguiente(aux);
-			aux.getAnterior().setSiguiente(jefe);
-			aux.setAnterior(jefe);
-		}*/
 	}
-	public NodoDoble obtenerJefe() {
+	public int obtenerJefe() {
 		NodoDoble aux = listaB.getInicio();
-		NodoDoble jefe = null;
-		while (jefe == null) {
+		int  vidaJefe = 0;
+		while (vidaJefe == 0) {
 			if (aux.getEnemigo().jefe == true) {
-				jefe = aux;
-				if (aux.getAnterior() != null) {
-					aux.getAnterior().setSiguiente(aux.getSiguiente());
-				}
-				if (aux.getSiguiente() != null) {
-					aux.getSiguiente().setAnterior(aux.getAnterior());
-				}
+				vidaJefe = aux.getEnemigo().getVida();
+				aux.getEnemigo().coverEne();
 			} else {
 				aux = aux.getSiguiente();
 			}
 		}
-		return jefe;
+		return vidaJefe;
 	}
 	
 	public boolean verificarJefe() {
@@ -169,5 +126,8 @@ public class EnemigoB {
 			aux = aux.getSiguiente();
 		}
 		return false;
+	}
+	public boolean existo() {
+		return listaB.getTamano() != 0;
 	}
 }

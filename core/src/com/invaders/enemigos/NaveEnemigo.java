@@ -47,9 +47,14 @@ public class NaveEnemigo {
 	public void setY(float y) {
 		this.y = y;
 	}
-	public void modEnemigo() {
+	public void coverJefe() {
 		this.nave = new Texture("naveJefe.png");
 		this.vida = 4;
 		this.jefe = true;
+	}
+	public void coverEne() {
+		this.nave = new Texture("naveEne.png");
+		this.vida = 1;
+		this.jefe = false;
 	}
 }

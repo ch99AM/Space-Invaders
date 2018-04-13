@@ -14,10 +14,6 @@ public class MainInvaders extends Game {
 	
 	
 	private Music music;
-
-	//PantallaJuego juego;
-	//Texture fondo;
-	
 	Menu menu;
 	
 	public static SpriteBatch batch; // Para facilitar el dibujar figuras del juego
@@ -30,7 +26,6 @@ public class MainInvaders extends Game {
 		music.play(); 
 		music.setLooping(true);
 		
-		//juego = new PantallaJuego(this);
 		menu = new Menu(this);
 		
 		batch = new SpriteBatch();

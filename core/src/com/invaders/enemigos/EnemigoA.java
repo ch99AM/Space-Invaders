@@ -7,7 +7,7 @@ public class EnemigoA extends EnemigoBase {
 	
 	
 	public EnemigoA(int numE) {
-		super(-10);
+		super(-50);
 		int b = 0; // 
 		int nJefeA = (int) (Math.random() * numE); // saca la posicion del jefe
 		for (int i = 0; i <= numE; i++) {

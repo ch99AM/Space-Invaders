@@ -1,7 +1,6 @@
 package com.invaders.listas;
 
-import com.christian.invaders.Disparo;
-
+import com.invaders.enemigos.NaveEnemigo;
 
 public class ListaDoble {
 	private NodoDoble inicio;
@@ -27,9 +26,8 @@ public class ListaDoble {
 		tamano++;
 	}
 	//Elimina Nodo por posicion de la nave
-	public void eliminarNodo(int x, int y) {
-		if (x <= inicio.getEnemigo().getX() && inicio.getEnemigo().getX() <= x + 40 && y <= inicio.getEnemigo().getY()
-				&& inicio.getEnemigo().getY() <= y + 10) {
+	public void eliminarNodo(int posicion) {
+		if (posicion == 0) {
 			inicio.getEnemigo().disminuirVida();
 			if (inicio.getEnemigo().getVida() == 0) { 
 				if (inicio.getSiguiente() == null) {
@@ -40,27 +38,35 @@ public class ListaDoble {
 				}
 				tamano --;
 			}
-			Disparo.y = 720;// Banderilla para hacer que el disparo desaparesca
 		}
-		else if (tamano != 1) {
+		else if (posicion < tamano && posicion > 0) {
 			NodoDoble aux = inicio;
-			while (aux != null) {
-				if (x <= aux.getEnemigo().getX() && aux.getEnemigo().getX() <= x + 40 && y <= aux.getEnemigo().getY()
-						&& aux.getEnemigo().getY() <= y + 10) {
-					aux.getEnemigo().disminuirVida();
-					if (aux.getEnemigo().getVida() == 0) {
-						aux.getAnterior().setSiguiente(aux.getSiguiente());
-						if (aux.getSiguiente() != null) {
-							aux.getSiguiente().setAnterior(aux.getAnterior());
-						}
-						tamano--;
-					}
-					Disparo.y = 720;
-				}
+			for (int i = 0; i < posicion; i++) {
 				aux = aux.getSiguiente();
 			}
+			aux.getEnemigo().disminuirVida();
+			if (aux.getEnemigo().getVida() == 0) {
+				aux.getAnterior().setSiguiente(aux.getSiguiente());
+				if (aux.getSiguiente() != null) {
+					aux.getSiguiente().setAnterior(aux.getAnterior());
+				}
+				tamano--;
+			}
 		}
-		
+	}
+
+	public int  buscarNodo(int x , int y) {
+		int posicion = 0;
+		NodoDoble aux = inicio;
+		while (aux != null) {
+			if (x <= aux.getEnemigo().getX() && aux.getEnemigo().getX() <= x + 40 &&
+					y <= aux.getEnemigo().getY() && aux.getEnemigo().getY() <= y + 10) {
+			return 	posicion;
+			}
+			posicion ++;
+			aux = aux.getSiguiente();
+		}
+		return -2;// indica que no hay nadie en esa posicion.
 	}
 	
 	public NodoDoble ultimo(){
@@ -73,15 +79,24 @@ public class ListaDoble {
 		}
 		return null;
 	}
+	public NaveEnemigo buscarNodo(int posicion) {
+		NodoDoble aux = inicio;
+		for(int i = 0; i < posicion; i++) {
+			aux= aux.getSiguiente();
+		}
+		return aux.getEnemigo();
+		
+	}
 	public void insertar(NodoDoble valor, int posicion) {
 		if (posicion < tamano && posicion >= 0) {
-			if (posicion == tamano--) {
+			if (posicion == (tamano--)) {
 				valor.setAnterior(ultimo());
 				valor.setSiguiente(null);
 			}
 			if (posicion == 0) {
 				valor.setSiguiente(inicio);
 				inicio.setAnterior(valor);
+				inicio = valor;
 			}
 			else if (posicion != 0 && posicion != tamano--) {
 				int p = 0;
@@ -106,17 +121,12 @@ public class ListaDoble {
 	public NodoDoble getInicio() {
 		return inicio;
 	}
-
-	public void setInicio(NodoDoble inicio) {
-		this.inicio = inicio;
+	public void setInicio(NodoDoble valor) {
+		this.inicio = valor;		
 	}
 	
 	public int getTamano() {
 		return tamano;
-	}
-	
-	public void setTamano(int tamano) {
-		this.tamano = tamano;
 	}
 
 }
