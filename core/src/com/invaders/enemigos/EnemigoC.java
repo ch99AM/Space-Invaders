@@ -7,6 +7,8 @@ import com.invaders.listas.NodoSimple;
 public class EnemigoC extends EnemigoAbstract{
 	
 	private ListaCircular listaC;
+	private float velocidad;
+	
 	
 	public EnemigoC(int numE) {
 		listaC = new ListaCircular();
@@ -22,6 +24,7 @@ public class EnemigoC extends EnemigoAbstract{
 			}
 			d += 70;
 		}
+		velocidad = (float) 1.25;
 	}
 	public void renderLista(int x , int y) {
 		int posicion = listaC.buscarNodo(x, y);
@@ -59,7 +62,7 @@ public class EnemigoC extends EnemigoAbstract{
 			if (listaC.getUltimo().getEnemigo().getX() >= 1100) {
 				ext = -1;
 				for (int i = 0; i < listaC.getTamano(); i++) {
-					aux.getEnemigo().setY(aux.getEnemigo().getY() - 32);
+					aux.getEnemigo().setY(aux.getEnemigo().getY() - 40);
 					aux = aux.getSiguiente();
 				}
 				aux = listaC.getInicio();
@@ -67,13 +70,13 @@ public class EnemigoC extends EnemigoAbstract{
 			if (aux.getEnemigo().getX() <= 0) {
 				ext = 1;
 				for (int i = 0; i < listaC.getTamano(); i++) {
-					aux.getEnemigo().setY(aux.getEnemigo().getY() - 32);
+					aux.getEnemigo().setY(aux.getEnemigo().getY() - 40);
 					aux = aux.getSiguiente();
 				}
 				aux = listaC.getInicio();
 			} 
 			for (int i = 0; i < listaC.getTamano(); i++) {
-				aux.getEnemigo().setX(aux.getEnemigo().getX() + ext);
+				aux.getEnemigo().setX(aux.getEnemigo().getX() + ext*velocidad);
 				aux = aux.getSiguiente();
 			}
 		}

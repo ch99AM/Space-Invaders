@@ -24,6 +24,7 @@ public class EnemigoBase extends EnemigoAbstract {
 			listaEnemigos.agregarAlfinal(1, a, 680);
 			a += 70;
 		}		
+		velocidad = (float) 1.25;
 	}
 
 	public void renderLista(int x, int y) {
@@ -44,7 +45,7 @@ public class EnemigoBase extends EnemigoAbstract {
 			if (listaEnemigos.ultimo().getX() >= 1100) {
 				ext = -1;
 				while (aux != null) {
-					aux.getEnemigo().setY(aux.getEnemigo().getY() - 32);
+					aux.getEnemigo().setY(aux.getEnemigo().getY() - 40);
 					aux = aux.getSiguiente();
 				}
 				aux = listaEnemigos.getInicio();
@@ -52,13 +53,13 @@ public class EnemigoBase extends EnemigoAbstract {
 			if (aux.getEnemigo().getX() <= 0) {
 				ext = 1;
 				while (aux != null) {
-					aux.getEnemigo().setY(aux.getEnemigo().getY() - 32);
+					aux.getEnemigo().setY(aux.getEnemigo().getY() - 40);
 					aux = aux.getSiguiente();
 				}
 				aux = listaEnemigos.getInicio();
 			}  
 			while (aux != null) {
-				aux.getEnemigo().setX(aux.getEnemigo().getX() + ext);
+				aux.getEnemigo().setX(aux.getEnemigo().getX() + ext*velocidad);
 				aux = aux.getSiguiente();
 			}
 		}
@@ -68,12 +69,25 @@ public class EnemigoBase extends EnemigoAbstract {
 		int posicion = listaEnemigos.buscarNodo(x, y);
 		if (posicion != -2) {
 			listaEnemigos.eliminarNodo(posicion);
+			agrupar(posicion);
 			Disparo.y = 720;
 			destruido.play();
 		}
 	}
 	public boolean existo() {
 		return listaEnemigos.getInicio() != null;
+	}
+	public void agrupar(int posicion) {
+		NodoSimple aux = listaEnemigos.getInicio();
+		for (int i = 0; i < listaEnemigos.getTamano(); i++) {
+			if (i <= posicion) {
+				aux.getEnemigo().setX(aux.getEnemigo().getX() + 35);
+			}
+			else {
+				aux.getEnemigo().setX(aux.getEnemigo().getX() - 35);
+			}
+			aux = aux.getSiguiente();
+		}
 	}
 
 }

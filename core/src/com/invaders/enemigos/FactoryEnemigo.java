@@ -20,6 +20,7 @@ public class FactoryEnemigo {
 			
 		}
 		if(tipo == "EnemigoD") {
+			return new EnemigoD(9);
 			
 		}
 		if(tipo == "EnemigoE") {

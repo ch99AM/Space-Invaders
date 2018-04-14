@@ -10,6 +10,7 @@ public class EnemigoB extends EnemigoAbstract {
 	
 	public ListaDoble listaB;
 	private int tiempo;
+	private float velocidad;
 	
 	
 	public EnemigoB(int numE) {
@@ -26,6 +27,7 @@ public class EnemigoB extends EnemigoAbstract {
 			}
 			b += 70;
 		}
+		velocidad = (float)1.5;
 	}
 
 	public void renderLista(int x, int y) {
@@ -53,7 +55,7 @@ public class EnemigoB extends EnemigoAbstract {
 			if (listaB.ultimo().getEnemigo().getX() >= 1100) {
 				ext = -1;
 				while (aux != null) {
-					aux.getEnemigo().setY(aux.getEnemigo().getY() - 32);
+					aux.getEnemigo().setY(aux.getEnemigo().getY() - 40);
 					aux = aux.getSiguiente();
 				}
 				aux = inicio;
@@ -61,13 +63,13 @@ public class EnemigoB extends EnemigoAbstract {
 			if (aux.getEnemigo().getX() <= 0) {
 				ext = 1;
 				while (aux != null) {
-					aux.getEnemigo().setY(aux.getEnemigo().getY() - 32);
+					aux.getEnemigo().setY(aux.getEnemigo().getY() - 40);
 					aux = aux.getSiguiente();
 				}
 				aux = inicio;
 			}  
 			while (aux != null) {
-				aux.getEnemigo().setX(aux.getEnemigo().getX() + ext);
+				aux.getEnemigo().setX(aux.getEnemigo().getX() + ext*velocidad);
 				aux = aux.getSiguiente();
 			}
 		}

@@ -4,6 +4,7 @@ import com.invaders.enemigos.EnemigoA;
 import com.invaders.enemigos.EnemigoB;
 import com.invaders.enemigos.EnemigoBase;
 import com.invaders.enemigos.EnemigoC;
+import com.invaders.enemigos.EnemigoD;
 import com.invaders.enemigos.FactoryEnemigo;
 
 public class NivelUno {
@@ -16,6 +17,8 @@ public class NivelUno {
 		private EnemigoB enemigo4;
 		private EnemigoC enemigo5;
 		
+		private EnemigoD enemigo6;
+		
 	public NivelUno() {
 		
 		
@@ -27,26 +30,29 @@ public class NivelUno {
 		enemigo4 = (EnemigoB) getter.getEnemigo("EnemigoB");
 		enemigo5 = (EnemigoC) getter.getEnemigo("EnemigoC");
 				
+		enemigo6 = (EnemigoD) getter.getEnemigo("EnemigoD");
 		
 
 	}
 	
 	public void render(int x, int y) {
-		//if(enemigo1.existo()) {
-		//	enemigo1.renderLista(x, y);
-	//	}
-		///else if(enemigo2.existo()){
-		//	enemigo2.renderLista(x, y);
-	//	}
-	//	else if(enemigo3.existo()) {
-		//	enemigo3.renderLista(x, y);
-	//	}
-	//	else if(enemigo4.existo()) {
+		/*
+		if(enemigo1.existo()) {
+			enemigo1.renderLista(x, y);
+		}
+		else if(enemigo2.existo()){
+			enemigo2.renderLista(x, y);
+		}
+		else if(enemigo3.existo()) {
+			enemigo3.renderLista(x, y);
+		}
+		else if(enemigo4.existo()) {
 			enemigo4.renderLista(x, y);			
-	//	}
-		//else if(enemigo5.existo()) {
-		//	enemigo5.renderLista(x, y);
-	//	}
+		}
+		else if(enemigo5.existo()) {
+			enemigo5.renderLista(x, y);
+		}*/
+		enemigo6.renderLista(x, y);
 	}
 }
 	

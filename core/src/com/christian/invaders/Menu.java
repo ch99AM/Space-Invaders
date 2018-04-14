@@ -33,7 +33,7 @@ public class Menu extends PantallaBase {
 		MainInvaders.batch.begin();
 		
 		if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
-			start.play(0.75f);
+			start.play(0.25f);
 			invaders.setScreen(juego);
 		}
 		else {

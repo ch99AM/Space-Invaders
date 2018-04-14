@@ -4,12 +4,27 @@ import com.christian.invaders.MainInvaders;
 import com.invaders.listas.ListaSort;
 import com.invaders.listas.NodoSimple;
 
-public class EnemigoD {
+public class EnemigoD extends EnemigoAbstract {
+	
 	public ListaSort listaSort;
 	
-	public EnemigoD() {
+	public EnemigoD(int numE) {
 		listaSort = new ListaSort();  
 		
+		int d = 0; // 
+		int nJefeD = (int) (Math.random() * numE); // saca la posicion del jefe
+		for (int i = 0; i <= numE; i++) {
+			int vida =  (int) (Math.random() * 2) +1;
+			if (i == nJefeD) {
+				listaSort.agregarAlFinal(4, d, 630);
+			}
+			else {
+				listaSort.agregarAlFinal(vida, d, 630);
+			}
+			d += 70;
+		}
+		listaSort.bubbleSort();
+		listaSort.listarvida();
 	}
 	public void renderLista(int x , int y) {
 		int posicion = listaSort.buscarNodo(x, y);
@@ -48,7 +63,7 @@ public class EnemigoD {
 			if (listaSort.getUltimo().getEnemigo().getX() >= 1100) {
 				ext = -1;
 				for (int i = 0; i < listaSort.getTamano(); i++) {
-					aux.getEnemigo().setY(aux.getEnemigo().getY() - 24);
+					aux.getEnemigo().setY(aux.getEnemigo().getY() - 32);
 					aux = aux.getSiguiente();
 				}
 				aux = listaSort.getInicio();
@@ -56,7 +71,7 @@ public class EnemigoD {
 			if (aux.getEnemigo().getX() <= 0) {
 				ext = 1;
 				for (int i = 0; i < listaSort.getTamano(); i++) {
-					aux.getEnemigo().setY(aux.getEnemigo().getY() - 24);
+					aux.getEnemigo().setY(aux.getEnemigo().getY() - 32);
 					aux = aux.getSiguiente();
 				}
 				aux = listaSort.getInicio();
