@@ -1,6 +1,7 @@
 package com.invaders.listas;
 
 import com.invaders.enemigos.NaveEnemigo;
+import com.invaders.jugador.Jugador;
 
 public class ListaDoble {
 	private NodoDoble inicio;
@@ -26,10 +27,11 @@ public class ListaDoble {
 		tamano++;
 	}
 	//Elimina Nodo por posicion de la nave
-	public void eliminarNodo(int posicion) {
+	public boolean eliminarNodo(int posicion) {
 		if (posicion == 0) {
 			inicio.getEnemigo().disminuirVida();
 			if (inicio.getEnemigo().getVida() == 0) { 
+				Jugador.puntaje += inicio.getEnemigo().getPuntaje();
 				if (inicio.getSiguiente() == null) {
 					inicio = null;
 				} else {
@@ -37,6 +39,7 @@ public class ListaDoble {
 					inicio.setAnterior(null);
 				}
 				tamano --;
+				return true;
 			}
 		}
 		else if (posicion < tamano && posicion > 0) {
@@ -46,13 +49,16 @@ public class ListaDoble {
 			}
 			aux.getEnemigo().disminuirVida();
 			if (aux.getEnemigo().getVida() == 0) {
+				Jugador.puntaje += aux.getEnemigo().getPuntaje();
 				aux.getAnterior().setSiguiente(aux.getSiguiente());
 				if (aux.getSiguiente() != null) {
 					aux.getSiguiente().setAnterior(aux.getAnterior());
 				}
 				tamano--;
+				return true;
 			}
 		}
+		return false;
 	}
 
 	public int  buscarNodo(int x , int y) {
@@ -121,8 +127,8 @@ public class ListaDoble {
 	public NodoDoble getInicio() {
 		return inicio;
 	}
-	public void setInicio(NodoDoble valor) {
-		this.inicio = valor;		
+	public void EliLista() {
+		this.inicio = null;		
 	}
 	
 	public int getTamano() {

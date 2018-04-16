@@ -1,10 +1,12 @@
 package com.invaders.enemigos;
 
 
-import com.christian.invaders.Disparo;
 import com.christian.invaders.MainInvaders;
+import com.invaders.jugador.Disparo;
+import com.invaders.jugador.Jugador;
 import com.invaders.listas.ListaDoble;
 import com.invaders.listas.NodoDoble;
+import com.invaders.listas.NodoSimple;
 
 public class EnemigoB extends EnemigoAbstract {
 	
@@ -38,6 +40,7 @@ public class EnemigoB extends EnemigoAbstract {
 				moverJefe((int) (Math.random() * listaB.getTamano()));
 			}
 			mover();
+			perder();
 			NodoDoble aux = inicio;
 			while (aux != null) {
 				MainInvaders.batch.draw(aux.getEnemigo().nave, aux.getEnemigo().x, aux.getEnemigo().y);
@@ -47,23 +50,23 @@ public class EnemigoB extends EnemigoAbstract {
 		tiempo++;
 	}
 	
-	protected int ext = 1; // bandera que indica si esta en un extremo
+	protected int ext = 2; // bandera que indica si esta en un extremo
 	public void mover() {
 		NodoDoble inicio = listaB.getInicio();
 		if (inicio != null) {
 			NodoDoble aux = inicio;
 			if (listaB.ultimo().getEnemigo().getX() >= 1100) {
-				ext = -1;
+				ext = -2;
 				while (aux != null) {
-					aux.getEnemigo().setY(aux.getEnemigo().getY() - 40);
+					aux.getEnemigo().setY(aux.getEnemigo().getY() - 64);
 					aux = aux.getSiguiente();
 				}
 				aux = inicio;
 			}
 			if (aux.getEnemigo().getX() <= 0) {
-				ext = 1;
+				ext = 2;
 				while (aux != null) {
-					aux.getEnemigo().setY(aux.getEnemigo().getY() - 40);
+					aux.getEnemigo().setY(aux.getEnemigo().getY() - 64);
 					aux = aux.getSiguiente();
 				}
 				aux = inicio;
@@ -79,11 +82,13 @@ public class EnemigoB extends EnemigoAbstract {
 		if (listaB.getInicio() != null) {
 			int posicion = listaB.buscarNodo(x, y);
 			if (posicion != -2) {
-				listaB.eliminarNodo(posicion);;
+				if (listaB.eliminarNodo(posicion)){
+					agrupar(posicion);
+				}
 				Disparo.y = 720;
 			}
 			if (!verificarJefe()) {
-				listaB.setInicio(null);
+				listaB.EliLista();
 			}
 		}
 	}
@@ -129,7 +134,27 @@ public class EnemigoB extends EnemigoAbstract {
 		}
 		return false;
 	}
+	
+	public void agrupar(int posicion) {
+		NodoDoble aux = listaB.getInicio();
+		for (int i = 0; i < listaB.getTamano(); i++) {
+			if (i >= posicion && listaB.getTamano() > 1) {
+				aux.getEnemigo().setX(aux.getEnemigo().getX() - 35);
+			}
+			else if(listaB.getTamano() > 1){
+				aux.getEnemigo().setX(aux.getEnemigo().getX() + 35);
+			}
+			aux = aux.getSiguiente();
+		}
+	}
+	
 	public boolean existo() {
 		return listaB.getTamano() != 0;
+	}
+	public void perder() {
+		if (listaB.getInicio().getEnemigo().getY() < 110) {
+			listaB.EliLista();
+			Jugador.perder();
+		}
 	}
 }

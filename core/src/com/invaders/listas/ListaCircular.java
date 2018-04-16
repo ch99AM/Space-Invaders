@@ -1,6 +1,6 @@
 package com.invaders.listas;
 
-import com.christian.invaders.Disparo;
+import com.invaders.jugador.Jugador;
 
 public class ListaCircular {
 	
@@ -28,14 +28,16 @@ public class ListaCircular {
     }
     
     // Elimina un nodo por su posicion
-	public void eliminarNodo(int posicion) {
+	public boolean eliminarNodo(int posicion) {
 		if (0 <= posicion && posicion < tamano) {
 			if (posicion == 0) {
 				inicio.getEnemigo().disminuirVida();
 				if (inicio.getEnemigo().getVida() == 0) {
+					Jugador.puntaje += inicio.getEnemigo().getPuntaje();
 					inicio = inicio.getSiguiente();
 					ultimo.setSiguiente(inicio);
 					tamano--;
+					return true;
 				}
 			} else {
 				NodoSimple aux = inicio;
@@ -44,6 +46,7 @@ public class ListaCircular {
 				}
 				aux.getSiguiente().getEnemigo().disminuirVida();
 				if (aux.getSiguiente().getEnemigo().getVida() == 0) {
+					Jugador.puntaje += aux.getEnemigo().getPuntaje();
 					if (aux.getSiguiente() == ultimo) {
 						aux.setSiguiente(inicio);
 						ultimo = aux;
@@ -52,10 +55,11 @@ public class ListaCircular {
 						aux.setSiguiente(siguiente.getSiguiente());
 					}
 				tamano--;
+				return true;
 				}
 			}
-			Disparo.y = 720;
 		}
+		return false;
 	}
     // Retorna la posicon del nodo
 	public int  buscarNodo(int x , int y) {
@@ -109,5 +113,10 @@ public class ListaCircular {
     public NodoSimple getUltimo() {
     	return ultimo;
     }
+	public void EliLista() {
+		this.inicio  = null;
+		this.tamano = 0;
+		
+	}
 
 }

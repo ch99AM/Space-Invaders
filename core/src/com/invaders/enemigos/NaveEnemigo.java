@@ -9,15 +9,18 @@ public class NaveEnemigo {
 	protected int vida;
 	protected float x ,y;
 	protected  boolean jefe;
+	protected int puntaje;
 
 	public NaveEnemigo(int vida, float x, float y) {
 		jefe = false;
 		if (vida < 4) {
 			nave = new Texture("naveEne.png");
+			this.puntaje = 10;
 		}
-		else {// Con esta vereficacion se puede usar para la lista base y la tipo A
+		else {// Con esta vereficacion se puede usar para la lista base y todas las demas
 			nave = new Texture("naveJefe.png");
 			jefe = true;
+			this.puntaje = 30;
 		}
 		this.vida = vida;
 		this.x = x;
@@ -51,10 +54,16 @@ public class NaveEnemigo {
 		this.nave = new Texture("naveJefe.png");
 		this.vida = 4;
 		this.jefe = true;
+		this.puntaje = 30;
 	}
 	public void coverEne() {
 		this.nave = new Texture("naveEne.png");
 		this.vida = 1;
 		this.jefe = false;
+		this.puntaje = 10;
+	}
+	
+	public int getPuntaje() {
+		return puntaje;
 	}
 }

@@ -1,6 +1,8 @@
 package com.invaders.enemigos;
 
 import com.christian.invaders.MainInvaders;
+import com.invaders.jugador.Disparo;
+import com.invaders.jugador.Jugador;
 import com.invaders.listas.ListaCircular;
 import com.invaders.listas.NodoSimple;
 
@@ -29,13 +31,17 @@ public class EnemigoC extends EnemigoAbstract{
 	public void renderLista(int x , int y) {
 		int posicion = listaC.buscarNodo(x, y);
 		if (posicion != -2) {
-			listaC.eliminarNodo(posicion);
+			if (listaC.eliminarNodo(posicion)) {
+				agrupar(posicion);
+			}
+			Disparo.y = 720;
 		}
 		if (listaC.getTamano() != 0) {
 			if (!verificarJefe()) {
 				listaC.editarNodo((int) (Math.random() * (listaC.getTamano() - 1)));
 			}
 			mover();
+			perder();
 			NodoSimple aux = listaC.getInicio();
 			for (int i = 0; i < listaC.getTamano(); i++) {
 				MainInvaders.batch.draw(aux.getEnemigo().nave, aux.getEnemigo().x, aux.getEnemigo().y);
@@ -55,22 +61,22 @@ public class EnemigoC extends EnemigoAbstract{
 			return false;
 	}
 	
-	private int ext = 1;
+	private int ext = 2;
 	public void mover() {
 		if (listaC.getInicio() != null) {
 			NodoSimple aux = listaC.getInicio();
 			if (listaC.getUltimo().getEnemigo().getX() >= 1100) {
-				ext = -1;
+				ext = -2;
 				for (int i = 0; i < listaC.getTamano(); i++) {
-					aux.getEnemigo().setY(aux.getEnemigo().getY() - 40);
+					aux.getEnemigo().setY(aux.getEnemigo().getY() - 64);
 					aux = aux.getSiguiente();
 				}
 				aux = listaC.getInicio();
 			}
 			if (aux.getEnemigo().getX() <= 0) {
-				ext = 1;
+				ext = 2;
 				for (int i = 0; i < listaC.getTamano(); i++) {
-					aux.getEnemigo().setY(aux.getEnemigo().getY() - 40);
+					aux.getEnemigo().setY(aux.getEnemigo().getY() - 64);
 					aux = aux.getSiguiente();
 				}
 				aux = listaC.getInicio();
@@ -83,5 +89,23 @@ public class EnemigoC extends EnemigoAbstract{
 	}
 	public boolean existo() {
 		return listaC.getTamano() != 0;
+	}
+	public void agrupar(int posicion) {
+		NodoSimple aux = listaC.getInicio();
+		for (int i = 0; i < listaC.getTamano(); i++) {
+			if (i >= posicion && listaC.getTamano() > 1) {
+				aux.getEnemigo().setX(aux.getEnemigo().getX() - 35);
+			}
+			else if(listaC.getTamano() > 1){
+				aux.getEnemigo().setX(aux.getEnemigo().getX() + 35);
+			}
+			aux = aux.getSiguiente();
+		}
+	}
+	public void perder() {
+		if (listaC.getInicio().getEnemigo().getY() < 110) {
+			listaC.EliLista();
+			Jugador.perder();
+		}
 	}
 }

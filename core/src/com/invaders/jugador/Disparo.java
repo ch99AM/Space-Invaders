@@ -1,10 +1,11 @@
-package com.christian.invaders;
+package com.invaders.jugador;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.Files.FileType;
 import com.badlogic.gdx.graphics.Texture;
+import com.christian.invaders.MainInvaders;
 
 public class Disparo {
 	
@@ -28,7 +29,7 @@ public class Disparo {
 		if (this.disparado) {
 			MainInvaders.batch.draw(bala, x, y);
 			if (this.y < 725) {
-				this.y += 16;
+				this.y += 8;
 			}
 			else {
 				this.disparado = false;

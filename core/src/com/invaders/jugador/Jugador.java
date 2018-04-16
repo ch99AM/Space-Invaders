@@ -3,20 +3,19 @@ package com.invaders.jugador;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
-import com.christian.invaders.Disparo;
 import com.christian.invaders.MainInvaders;
 
 public class Jugador {
 	Texture naveJ;
 	private int x;
-	private int puntaje;
-	private int vida;
+	public static int puntaje;
+	private static int vida;
 
 	public Jugador() {
 		this.x = 545;
 		naveJ = new Texture("naveJugador.png");
-		this.vida = 3;
-		this.puntaje = 0;
+		vida = 1;
+		puntaje = 0;
 	}
 
 	public void renderJugador() {
@@ -37,7 +36,13 @@ public class Jugador {
 		}
 		return x;
 	}
-
+	public static void perder() {
+		vida --;
+	}
+	public static int getVida() {
+		return vida;
+	}
+	
 	public int getX() {
 		return x;
 	}

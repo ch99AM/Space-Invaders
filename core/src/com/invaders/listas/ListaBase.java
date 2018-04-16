@@ -1,7 +1,7 @@
 package com.invaders.listas;
 
-import com.christian.invaders.Disparo;
 import com.invaders.enemigos.NaveEnemigo;
+import com.invaders.jugador.Jugador;
 
 public class ListaBase {
 	
@@ -28,19 +28,20 @@ public class ListaBase {
 	}
 	
 	//Elimina un nodo por la posicion en la que se encuentra.
-	public void eliminarNodo(int posicion) {
+	public boolean eliminarNodo(int posicion) {
 		//Validacion por si es el primero 
 		if (posicion == 0) {
 			inicio.getEnemigo().disminuirVida();
 			if (inicio.getEnemigo().getVida() == 0) {
+				Jugador.puntaje += inicio.getEnemigo().getPuntaje();
 				if (inicio.getSiguiente() == null) {
 					inicio = null;;
 				} else {
 					inicio = inicio.getSiguiente();
 				}
 				this.tamano --;
+				return true;
 			}
-		
 		}
 		else {
 			if (posicion > 0 && posicion <= tamano) {
@@ -50,11 +51,14 @@ public class ListaBase {
 				}
 				aux.getSiguiente().getEnemigo().disminuirVida();
 					if (aux.getSiguiente().getEnemigo().getVida() == 0) {
+						Jugador.puntaje += aux.getEnemigo().getPuntaje();
 						aux.setSiguiente(aux.getSiguiente().getSiguiente());
 						this.tamano--;
+						return true;
 					}
 			}
 		}
+		return false;
 
 	}
 	
@@ -101,8 +105,8 @@ public class ListaBase {
 		return inicio;
 	}
 
-	public void setInicio(NodoSimple valor) {
-		inicio = valor;
+	public void EliLista() {
+		this.inicio = null;
 		
 	}
 }

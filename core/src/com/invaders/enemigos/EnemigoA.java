@@ -1,6 +1,7 @@
 package com.invaders.enemigos;
 
 import com.christian.invaders.MainInvaders;
+import com.invaders.jugador.Jugador;
 import com.invaders.listas.NodoSimple;
 
 public class EnemigoA extends EnemigoBase {
@@ -27,6 +28,7 @@ public class EnemigoA extends EnemigoBase {
 			destruirEnemeigo(x, y);
 			mover();
 			NodoSimple aux = listaEnemigos.getInicio();
+			perder();
 			if (obtenerJefe()) {
 				while (aux != null) {
 					MainInvaders.batch.draw(aux.getEnemigo().nave, aux.getEnemigo().x, aux.getEnemigo().y);
@@ -34,7 +36,8 @@ public class EnemigoA extends EnemigoBase {
 				}
 			}
 			else {
-				listaEnemigos.setInicio(null);
+				Jugador.puntaje += (listaEnemigos.getTamano()- 1)*10 + 15;
+				listaEnemigos.EliLista();
 			}
 		}
 		

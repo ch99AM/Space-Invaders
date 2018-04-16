@@ -1,6 +1,7 @@
 package com.invaders.enemigos;
 
 import com.christian.invaders.MainInvaders;
+import com.invaders.jugador.Jugador;
 import com.invaders.listas.ListaSort;
 import com.invaders.listas.NodoSimple;
 
@@ -56,12 +57,12 @@ public class EnemigoD extends EnemigoAbstract {
 			return false;
 	}
 	
-	private int ext = 1;
+	private int ext = 2;
 	public void mover() {
 		if (listaSort.getInicio() != null) {
 			NodoSimple aux = listaSort.getInicio();
 			if (listaSort.getUltimo().getEnemigo().getX() >= 1100) {
-				ext = -1;
+				ext = -2;
 				for (int i = 0; i < listaSort.getTamano(); i++) {
 					aux.getEnemigo().setY(aux.getEnemigo().getY() - 32);
 					aux = aux.getSiguiente();
@@ -69,7 +70,7 @@ public class EnemigoD extends EnemigoAbstract {
 				aux = listaSort.getInicio();
 			}
 			if (aux.getEnemigo().getX() <= 0) {
-				ext = 1;
+				ext = 2;
 				for (int i = 0; i < listaSort.getTamano(); i++) {
 					aux.getEnemigo().setY(aux.getEnemigo().getY() - 32);
 					aux = aux.getSiguiente();
@@ -80,6 +81,24 @@ public class EnemigoD extends EnemigoAbstract {
 				aux.getEnemigo().setX(aux.getEnemigo().getX() + ext);
 				aux = aux.getSiguiente();
 			}
+		}
+	}
+	public void agrupar(int posicion) {
+		NodoSimple aux = listaSort.getInicio();
+		for (int i = 0; i < listaSort.getTamano(); i++) {
+			if (i >= posicion && listaSort.getTamano() > 1) {
+				aux.getEnemigo().setX(aux.getEnemigo().getX() - 35);
+			}
+			else if(listaSort.getTamano() > 1){
+				aux.getEnemigo().setX(aux.getEnemigo().getX() + 35);
+			}
+			aux = aux.getSiguiente();
+		}
+	}
+	public void perder() {
+		if (listaSort.getInicio().getEnemigo().getY() < 110) {
+			listaSort.EliLista();
+			Jugador.perder();
 		}
 	}
 }
