@@ -4,11 +4,11 @@ package com.invaders.enemigos;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Files.FileType;
 import com.badlogic.gdx.audio.Sound;
-import com.christian.invaders.MainInvaders;
 import com.invaders.jugador.Disparo;
 import com.invaders.jugador.Jugador;
 import com.invaders.listas.ListaBase;
 import com.invaders.listas.NodoSimple;
+import com.invaders.main.MainInvaders;
 
 public class EnemigoBase extends EnemigoAbstract {
 

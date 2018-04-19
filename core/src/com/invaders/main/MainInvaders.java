@@ -1,4 +1,4 @@
-package com.christian.invaders;
+package com.invaders.main;
 
 import com.badlogic.gdx.Files.FileType;
 import com.badlogic.gdx.Game;

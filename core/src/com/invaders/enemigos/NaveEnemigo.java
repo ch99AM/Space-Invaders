@@ -41,8 +41,8 @@ public class NaveEnemigo {
 	public float getX() {
 		return x;
 	}
-	public void setX(float x) {
-		this.x = x;
+	public void setX(float d) {
+		this.x = d;
 	}
 	public float getY() {
 		return y;

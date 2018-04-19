@@ -1,8 +1,8 @@
-package com.christian.invaders.desktop;
+package com.invaders.desktop;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.christian.invaders.MainInvaders;
+import com.invaders.main.MainInvaders;
 
 public class DesktopLauncher {
 	public static void main (String[] arg) {

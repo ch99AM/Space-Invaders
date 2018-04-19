@@ -2,12 +2,14 @@ package com.invaders.niveles;
 
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.christian.invaders.MainInvaders;
 import com.invaders.enemigos.EnemigoA;
 import com.invaders.enemigos.EnemigoB;
 import com.invaders.enemigos.EnemigoBase;
 import com.invaders.enemigos.EnemigoC;
+import com.invaders.enemigos.EnemigoD;
+import com.invaders.enemigos.EnemigoE;
 import com.invaders.enemigos.FactoryEnemigo;
+import com.invaders.main.MainInvaders;
 
 public class NivelUno {
 
@@ -21,6 +23,8 @@ public class NivelUno {
 		private NivelDos N2;
 		
 		private BitmapFont font;
+		
+		
 		
 
 		
@@ -36,26 +40,27 @@ public class NivelUno {
 		enemigo5 = (EnemigoC) getter.getEnemigo("EnemigoC");
 		this.font = font;
 		
+		
 
 	}
 	
 	public void render(int x, int y) {
-		if(!enemigo1.existo()) {
+		if(enemigo1.existo()) {
 			enemigo1.renderLista(x, y);
 			font.draw(MainInvaders.batch, "EnemigoBase", 500, 680);
 			font.draw(MainInvaders.batch, "EnemigoA", 600, 680);
 		}
-		else if(!enemigo2.existo()){
+		else if(enemigo2.existo()){
 			enemigo2.renderLista(x, y);
 			font.draw(MainInvaders.batch, "EnemigoA", 500, 680);
 			font.draw(MainInvaders.batch, "EnemigoC", 600, 680);
 		}
-		else if(!enemigo3.existo()) {
+		else if(enemigo3.existo()) {
 			enemigo3.renderLista(x, y);
 			font.draw(MainInvaders.batch, "EnemigoC", 500, 680);
 			font.draw(MainInvaders.batch, "EnemigoB", 600, 680);
 		}
-		else if(!enemigo4.existo()) {
+		else if(enemigo4.existo()) {
 			enemigo4.renderLista(x, y);
 			font.draw(MainInvaders.batch, "EnemigoB", 500, 680);
 			font.draw(MainInvaders.batch, "EnemigoC", 600, 680);
@@ -65,9 +70,9 @@ public class NivelUno {
 			font.draw(MainInvaders.batch, "EnemigoC", 500, 680);
 			font.draw(MainInvaders.batch, "Siguiente Nivel", 600, 680);
 		}
-		else {
-			N2.render(x, y);
-		}
+		//else {
+		//	N2.render(x, y);
+		//}
 	}
 }
 	

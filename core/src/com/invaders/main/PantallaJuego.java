@@ -1,4 +1,4 @@
-package com.christian.invaders;
+package com.invaders.main;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Files.FileType;
@@ -47,7 +47,7 @@ public class PantallaJuego extends PantallaBase {
 		font.draw(MainInvaders.batch,"Ptns: " + StrPuntaje, 0, 680);
 		font.draw(MainInvaders.batch,"Vida: " + StrVida, 100, 680);
 		
-		if (ju1.getVida() > 0) {
+		if (Jugador.getVida() > 0) {
 			ju1.renderJugador();
 			disparo.setX(ju1.getX());
 			disparo.render();
@@ -58,10 +58,7 @@ public class PantallaJuego extends PantallaBase {
 				invaders.setScreen(menu);
 				gameOver.play(50f);
 		}
-		MainInvaders.batch.end();
-		
-		System.out.println(ju1.puntaje);
-		
+		MainInvaders.batch.end();		
 	}
 	
 	

@@ -3,7 +3,7 @@ package com.invaders.jugador;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
-import com.christian.invaders.MainInvaders;
+import com.invaders.main.MainInvaders;
 
 public class Jugador {
 	Texture naveJ;

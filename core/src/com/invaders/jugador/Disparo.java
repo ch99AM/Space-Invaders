@@ -5,7 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.Files.FileType;
 import com.badlogic.gdx.graphics.Texture;
-import com.christian.invaders.MainInvaders;
+import com.invaders.main.MainInvaders;
 
 public class Disparo {
 	

@@ -1,9 +1,9 @@
 package com.invaders.enemigos;
 
-import com.christian.invaders.MainInvaders;
 import com.invaders.jugador.Jugador;
 import com.invaders.listas.ListaSort;
 import com.invaders.listas.NodoSimple;
+import com.invaders.main.MainInvaders;
 
 public class EnemigoD extends EnemigoAbstract {
 	
@@ -12,7 +12,7 @@ public class EnemigoD extends EnemigoAbstract {
 	public EnemigoD(int numE) {
 		listaSort = new ListaSort();  
 		
-		int d = 0; // 
+		int d = 0;  
 		int nJefeD = (int) (Math.random() * numE); // saca la posicion del jefe
 		for (int i = 0; i <= numE; i++) {
 			int vida =  (int) (Math.random() * 2) +1;
@@ -24,20 +24,25 @@ public class EnemigoD extends EnemigoAbstract {
 			}
 			d += 70;
 		}
-		listaSort.bubbleSort();
+		//listaSort.bubbleSort();
 		listaSort.listarvida();
 	}
+	
+	
 	public void renderLista(int x , int y) {
 		int posicion = listaSort.buscarNodo(x, y);
 		if (posicion != -2) {
-			listaSort.eliminarNodo(posicion);
+			if(listaSort.eliminarNodo(posicion)) {
+				agrupar(posicion);
+			}
 		}
 		if (listaSort.getTamano() != 0) {
 			if (!verificarJefe()) {
 				listaSort.editarNodo((int) (Math.random() * (listaSort.getTamano() - 1)));
-				listaSort.bubbleSort();
+				//listaSort.bubbleSort();
 			}
 			mover();
+			perder();
 			NodoSimple aux = listaSort.getInicio();
 			for (int i = 0; i < listaSort.getTamano(); i++) {
 				MainInvaders.batch.draw(aux.getEnemigo().nave, aux.getEnemigo().x, aux.getEnemigo().y);
@@ -101,4 +106,9 @@ public class EnemigoD extends EnemigoAbstract {
 			Jugador.perder();
 		}
 	}
+	
+	public boolean existo() {
+		return listaSort.getTamano() != 0;
+	}
+	
 }

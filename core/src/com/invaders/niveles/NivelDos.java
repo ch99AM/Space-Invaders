@@ -1,12 +1,12 @@
 package com.invaders.niveles;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.christian.invaders.MainInvaders;
 import com.invaders.enemigos.EnemigoA;
 import com.invaders.enemigos.EnemigoB;
 import com.invaders.enemigos.EnemigoBase;
 import com.invaders.enemigos.EnemigoC;
 import com.invaders.enemigos.FactoryEnemigo;
+import com.invaders.main.MainInvaders;
 
 public class NivelDos {
 

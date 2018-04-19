@@ -1,12 +1,12 @@
 package com.invaders.enemigos;
 
 
-import com.christian.invaders.MainInvaders;
 import com.invaders.jugador.Disparo;
 import com.invaders.jugador.Jugador;
 import com.invaders.listas.ListaDoble;
 import com.invaders.listas.NodoDoble;
 import com.invaders.listas.NodoSimple;
+import com.invaders.main.MainInvaders;
 
 public class EnemigoB extends EnemigoAbstract {
 	
