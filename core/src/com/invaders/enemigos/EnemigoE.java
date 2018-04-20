@@ -1,34 +1,49 @@
 package com.invaders.enemigos;
 
+import org.omg.CORBA.portable.IndirectionException;
+
 import com.invaders.jugador.Disparo;
 import com.invaders.jugador.Jugador;
 import com.invaders.listas.ListaCirDoble;
 import com.invaders.listas.NodoDoble;
 import com.invaders.main.MainInvaders;
 
-public class EnemigoE extends EnemigoAbstract{
-	
+/**
+ * Contiene los metodos para controlar al enemigo E
+ * 
+ * @author Christian
+ */
+public class EnemigoE extends EnemigoAbstract {
+
 	private ListaCirDoble listaEnemigos;
 	private float velocidad;
-	
-	
-	public EnemigoE(int numE) {
-		numE = 6;
+	private int ext = 1; // Indica si la hilera llego a un extremo
+
+	public EnemigoE() {
+		int numE = 6;
 		listaEnemigos = new ListaCirDoble();
-		
-		int e = 350;
+
+		int e = 840;
 		for (int i = 0; i <= numE; i++) {
 			if (i == 3) {
 				listaEnemigos.agregarAlFinal(4, e, 420);
-			}
-			else {
+			} else {
 				listaEnemigos.agregarAlFinal(1, e, 420);
 			}
-			e += 70;
+			e -= 70;
 		}
 		velocidad = (float) 0.75;
 	}
-	public void renderLista(int x , int y) {
+
+	/**
+	 * Actualiza cualquier cambio en la hilera de enemigos
+	 * 
+	 * @param x
+	 *            Posicion del disparo en x
+	 * @param y
+	 *            Posicion del disparo en y
+	 */
+	public void renderLista(int x, int y) {
 		int posicion = listaEnemigos.buscarNodo(x, y);
 		if (posicion != -2) {
 			System.out.println(posicion);
@@ -39,7 +54,7 @@ public class EnemigoE extends EnemigoAbstract{
 		}
 		if (listaEnemigos.getTamano() != 0) {
 			if (!verificarJefe()) {
-				listaEnemigos.editarNodo((listaEnemigos.getTamano()/2)-(listaEnemigos.getTamano()%2));
+				listaEnemigos.editarNodo((listaEnemigos.getTamano() / 2) - (listaEnemigos.getTamano() % 2));
 			}
 			// mover();
 			girar();
@@ -52,18 +67,25 @@ public class EnemigoE extends EnemigoAbstract{
 		}
 	}
 
+	/**
+	 * Busca la existencia de un jefe en la hilera
+	 * 
+	 * @return true si encuentra al jefe
+	 */
 	public boolean verificarJefe() {
-			NodoDoble aux = listaEnemigos.getInicio();
-			for (int i = 0; i < listaEnemigos.getTamano(); i++) {
-				if (aux.getEnemigo().jefe == true && aux.getEnemigo().vida >= 0) {
-					return true;
-				}
-				aux = aux.getSiguiente();
+		NodoDoble aux = listaEnemigos.getInicio();
+		for (int i = 0; i < listaEnemigos.getTamano(); i++) {
+			if (aux.getEnemigo().jefe == true && aux.getEnemigo().vida >= 0) {
+				return true;
 			}
-			return false;
+			aux = aux.getSiguiente();
+		}
+		return false;
 	}
-	
-	private int ext = 2;
+
+	/**
+	 * Mueve la hilera de lado a lado y hacia abajo
+	 */
 	public void mover() {
 		if (listaEnemigos.getInicio() != null) {
 			NodoDoble aux = listaEnemigos.getInicio();
@@ -82,73 +104,89 @@ public class EnemigoE extends EnemigoAbstract{
 					aux = aux.getSiguiente();
 				}
 				aux = listaEnemigos.getInicio();
-			} 
+			}
 			for (int i = 0; i < listaEnemigos.getTamano(); i++) {
-				aux.getEnemigo().setX(aux.getEnemigo().getX() + ext*velocidad);
+				aux.getEnemigo().setX(aux.getEnemigo().getX() + ext * velocidad);
 				aux = aux.getSiguiente();
 			}
 		}
 	}
+
+	/**
+	 * Indica si el enemigo no ha sido destruida
+	 * 
+	 * @return true si el enemigo no ha sido destruido
+	 */
 	public boolean existo() {
 		return listaEnemigos.getTamano() != 0;
 	}
+
+	/**
+	 * Agrupa los enemigo cuando una nave es destruida
+	 * 
+	 * @param posicion
+	 *            La posicion del enemigo destruido
+	 */
 	public void agrupar(int posicion) {
 		NodoDoble aux = listaEnemigos.getInicio();
 		for (int i = 0; i < listaEnemigos.getTamano(); i++) {
 			if (i >= posicion && listaEnemigos.getTamano() > 1) {
 				aux.getEnemigo().setX(aux.getEnemigo().getX() - 35);
-			}
-			else if(listaEnemigos.getTamano() > 1){
+			} else if (listaEnemigos.getTamano() > 1) {
 				aux.getEnemigo().setX(aux.getEnemigo().getX() + 35);
 			}
 			aux = aux.getSiguiente();
 		}
 	}
+
+	/**
+	 * Evaula si el enemigo llega hasta abajo sin ser destruido Disminuye la vida al
+	 * jugador cuando el enemigo llega hasta abajo
+	 */
 	public void perder() {
 		if (listaEnemigos.getInicio().getEnemigo().getY() < 110) {
 			listaEnemigos.EliLista();
 			Jugador.perder();
 		}
-	}	
+	}
+
+	/**
+	 * "Metodo que permite hacer girar el enemigo"
+	 * 
+	 * No sirve :(
+	 */
+	float angulo = 1;
 
 	public void girar() {
 		if (listaEnemigos.getInicio() != null) {
-			if (listaEnemigos.getInicio().getEnemigo().getX() < 560) {
+			if (angulo < 100) {
 				NodoDoble aux = listaEnemigos.getInicio();
-				double angulo = 1; //grados
-				double anguloRadianes = Math.toRadians(angulo);
-				anguloRadianes = anguloRadianes % 1;
+				int tempX = 1;
+				int tempY = 1;
+				float m = 1;
+				System.out.println(m);
 				for (int i = 0; i < listaEnemigos.getTamano(); i++) {
 					if (aux.getEnemigo().jefe != true) {
-						if (i < listaEnemigos.getTamano() / 2) {
-							aux.getEnemigo().setX( (float) (aux.getEnemigo().getX() + 10*Math.cos(anguloRadianes)));
-							aux.getEnemigo().setY((float) (aux.getEnemigo().getY() + 10*Math.cos(anguloRadianes)));
-						}
-						else {
-							aux.getEnemigo().setX( (float) (aux.getEnemigo().getX() - 10*Math.cos(anguloRadianes)));
-							aux.getEnemigo().setY( (float) (aux.getEnemigo().getY() - 10*Math.cos(anguloRadianes)));
-							
+						if (i < (listaEnemigos.getTamano() / 2)) {
+							aux.getEnemigo().setX((aux.getEnemigo().getX() - tempX));
+							float r = ((m * aux.getEnemigo().getX()) + 420);
+							System.out.println(r);
+							aux.getEnemigo().setY(r);
+						} else {
+							aux.getEnemigo().setX((aux.getEnemigo().getX() + tempX));
+							float r = m * (aux.getEnemigo().getX() * -1) + 420;
+							System.out.println(r);
+							aux.getEnemigo().setY(r);
 						}
 					}
 					aux = aux.getSiguiente();
 				}
+				tempX += 1;
+				m += 1;
 				angulo += 1;
-			}
-			if (listaEnemigos.getInicio().getEnemigo().getX() > 559) {
-				NodoDoble aux = listaEnemigos.getInicio();
-				for (int i = 0; i < listaEnemigos.getTamano(); i++) {
-					if (aux.getEnemigo().jefe != true) {
-						aux.getEnemigo().setX(aux.getEnemigo().getX() + 1);
-						aux.getEnemigo().setY(aux.getEnemigo().getY() - 1);
-					}
-					System.out.println("Hola");
-					aux = aux.getSiguiente();
-				}
 			}
 		}
 
 	}
-		
+
 }
-
-
