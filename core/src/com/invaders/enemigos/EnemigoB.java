@@ -5,6 +5,7 @@ import com.invaders.jugador.Jugador;
 import com.invaders.listas.ListaDoble;
 import com.invaders.listas.NodoDoble;
 import com.invaders.main.MainInvaders;
+import com.invaders.main.PantallaJuego;
 
 /**
  * Contiene los metodos necesarios para el control del enemigo B
@@ -16,7 +17,6 @@ public class EnemigoB extends EnemigoAbstract {
 
 	public ListaDoble listaB;
 	private int tiempo;
-	private float velocidad;
 	private int extremo = 1; // bandera que indica si esta en un extremo
 
 	public EnemigoB(int numE) {
@@ -32,7 +32,6 @@ public class EnemigoB extends EnemigoAbstract {
 			}
 			b += 70;
 		}
-		velocidad = (float) 1.5;
 	}
 
 	/**
@@ -87,7 +86,7 @@ public class EnemigoB extends EnemigoAbstract {
 				aux = inicio;
 			}
 			while (aux != null) {
-				aux.getEnemigo().setX(aux.getEnemigo().getX() + extremo * velocidad);
+				aux.getEnemigo().setX(aux.getEnemigo().getX() + extremo * PantallaJuego.getVel());
 				aux = aux.getSiguiente();
 			}
 		}

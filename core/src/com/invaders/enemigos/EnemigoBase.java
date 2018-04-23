@@ -8,6 +8,7 @@ import com.invaders.jugador.Jugador;
 import com.invaders.listas.ListaBase;
 import com.invaders.listas.NodoSimple;
 import com.invaders.main.MainInvaders;
+import com.invaders.main.PantallaJuego;
 
 /**
  * Controla el enemigo mas basico del juego
@@ -18,9 +19,8 @@ import com.invaders.main.MainInvaders;
 public class EnemigoBase extends EnemigoAbstract {
 
 	protected ListaBase listaEnemigos;
-	protected float velocidad;
 	protected Sound destruido;
-	protected int ext = 2; // bandera que indica si esta en un extremo
+	protected float ext = 1; // bandera que indica si esta en un extremo
 
 	public EnemigoBase(int numE) {
 		listaEnemigos = new ListaBase();
@@ -31,7 +31,7 @@ public class EnemigoBase extends EnemigoAbstract {
 			listaEnemigos.agregarAlfinal(1, a, 680);
 			a += 70;
 		}
-		velocidad = (float) 1.25;
+
 	}
 
 	/**
@@ -62,7 +62,7 @@ public class EnemigoBase extends EnemigoAbstract {
 		if (listaEnemigos.getInicio() != null) {
 			NodoSimple aux = listaEnemigos.getInicio();
 			if (listaEnemigos.ultimo().getX() >= 1100) {
-				ext = -2;
+				ext = -1;
 				while (aux != null) {
 					aux.getEnemigo().setY(aux.getEnemigo().getY() - 64);
 					aux = aux.getSiguiente();
@@ -70,7 +70,7 @@ public class EnemigoBase extends EnemigoAbstract {
 				aux = listaEnemigos.getInicio();
 			}
 			if (aux.getEnemigo().getX() <= 0) {
-				ext = 2;
+				ext = 1;
 				while (aux != null) {
 					aux.getEnemigo().setY(aux.getEnemigo().getY() - 64);
 					aux = aux.getSiguiente();
@@ -78,7 +78,7 @@ public class EnemigoBase extends EnemigoAbstract {
 				aux = listaEnemigos.getInicio();
 			}
 			while (aux != null) {
-				aux.getEnemigo().setX(aux.getEnemigo().getX() + ext * velocidad);
+				aux.getEnemigo().setX(aux.getEnemigo().getX() + ext * PantallaJuego.getVel());
 				aux = aux.getSiguiente();
 			}
 		}
@@ -107,7 +107,7 @@ public class EnemigoBase extends EnemigoAbstract {
 	 * @return true si la hilera no ha sido destruido
 	 */
 	public boolean existo() {
-		return listaEnemigos.getInicio() != null;
+		return listaEnemigos.getTamano() != 0;
 	}
 
 	/**

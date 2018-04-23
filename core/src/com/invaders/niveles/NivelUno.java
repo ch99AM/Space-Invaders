@@ -3,6 +3,7 @@ package com.invaders.niveles;
 import java.util.MissingFormatArgumentException;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.invaders.control.Servidor;
 import com.invaders.enemigos.EnemigoA;
 import com.invaders.enemigos.EnemigoB;
 import com.invaders.enemigos.EnemigoBase;
@@ -11,6 +12,7 @@ import com.invaders.enemigos.EnemigoD;
 import com.invaders.enemigos.EnemigoE;
 import com.invaders.enemigos.FactoryEnemigo;
 import com.invaders.main.MainInvaders;
+import com.invaders.main.PantallaJuego;
 
 /**
  * Este objeto hace uso de los enemigos para crear varios de ellos y formar un
@@ -59,31 +61,37 @@ public class NivelUno {
 	 *            Posicion del disparo en y
 	 */
 	public void render(int x, int y) {
+		PantallaJuego.setVel((float)1.75);
 		if (enemigo1.existo()) {
 			enemigo1.renderLista(x, y);
 			font.draw(MainInvaders.batch, "EnemigoBase", 500, 680);
 			font.draw(MainInvaders.batch, "EnemigoA", 600, 680);
 			font.draw(MainInvaders.batch, "Nivel Uno", 1050, 680);
+			Servidor.actualizar1("EnemigoBase", "EnemigoA", "Nivel Uno");
 		} else if (enemigo2.existo()) {
 			enemigo2.renderLista(x, y);
 			font.draw(MainInvaders.batch, "EnemigoA", 500, 680);
 			font.draw(MainInvaders.batch, "EnemigoC", 600, 680);
 			font.draw(MainInvaders.batch, "Nivel Uno", 1050, 680);
+			Servidor.actualizar1("EnemigoA", "EnemigoC", "Nivel Uno");
 		} else if (enemigo3.existo()) {
 			enemigo3.renderLista(x, y);
 			font.draw(MainInvaders.batch, "EnemigoC", 500, 680);
 			font.draw(MainInvaders.batch, "EnemigoB", 600, 680);
 			font.draw(MainInvaders.batch, "Nivel Uno", 1050, 680);
+			Servidor.actualizar1("EnemigoC", "EnemigoB", "Nivel Uno");
 		} else if (enemigo4.existo()) {
 			enemigo4.renderLista(x, y);
 			font.draw(MainInvaders.batch, "EnemigoB", 500, 680);
 			font.draw(MainInvaders.batch, "EnemigoC", 600, 680);
 			font.draw(MainInvaders.batch, "Nivel Uno", 1050, 680);
+			Servidor.actualizar1("EnemigoB", "EnemigoC", "Nivel Uno");
 		} else if (enemigo5.existo()) {
 			enemigo5.renderLista(x, y);
 			font.draw(MainInvaders.batch, "EnemigoC", 500, 680);
 			font.draw(MainInvaders.batch, "Siguiente Nivel", 600, 680);
 			font.draw(MainInvaders.batch, "Nivel Uno", 1050, 680);
+			Servidor.actualizar1("EnemigoC", "Siguiente Nivel", "Nivel Uno");
 		} else {
 			N2.render(x, y);
 		}

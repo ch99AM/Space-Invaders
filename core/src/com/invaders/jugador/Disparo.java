@@ -19,7 +19,7 @@ public class Disparo {
 							// impacta.
 	private int x;
 	Texture bala;
-	boolean disparado;
+	private boolean disparado;
 	private Sound shoot;
 
 	public Disparo() {
@@ -37,7 +37,10 @@ public class Disparo {
 		if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
 			this.disparado = true;
 		}
-
+		subir();
+	}
+	
+	public void subir() {
 		if (this.disparado) {
 			MainInvaders.batch.draw(bala, x, y);
 			if (this.y < 725) {
@@ -56,8 +59,8 @@ public class Disparo {
 	 * @param x
 	 *            La posicion del jugador cuando disparo
 	 */
-	public void setX(int x) {
-		if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
+	public void setX(int x, boolean accept) {
+		if(Gdx.input.isKeyPressed(Input.Keys.UP) || accept) {
 			if (y >= 700) {
 				shoot.play();
 				this.y = 80;
@@ -65,7 +68,13 @@ public class Disparo {
 			}
 		}
 	}
-
+	
+	public void ctrDisparado(boolean dpd) {
+		if (dpd && this.disparado  == false){
+			this.disparado = true;
+		}
+	}
+	
 	public int getY() {
 		return y;
 	}

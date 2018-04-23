@@ -192,6 +192,7 @@ public class ListaDoble {
 	 */
 	public void EliLista() {
 		this.inicio = null;
+		this.tamano = 0;
 	}
 
 	/**

@@ -5,6 +5,7 @@ import com.invaders.jugador.Jugador;
 import com.invaders.listas.ListaCircular;
 import com.invaders.listas.NodoSimple;
 import com.invaders.main.MainInvaders;
+import com.invaders.main.PantallaJuego;
 
 /**
  * Contiene los metodos para controlar el enemigo C segun sus funciones
@@ -15,13 +16,11 @@ import com.invaders.main.MainInvaders;
 public class EnemigoC extends EnemigoAbstract {
 
 	private ListaCircular listaC;
-	private float velocidad;
-	private int ext = 2; // Bandera para mover hacia abajo la hilera
+	private int ext = 1; // Bandera para mover hacia abajo la hilera
 
 	public EnemigoC(int numE) {
 		listaC = new ListaCircular();
-
-		int d = 0; //
+		int d = 0; 
 		int nJefeC = (int) (Math.random() * numE); // saca la posicion del jefe
 		for (int i = 0; i <= numE; i++) {
 			if (i == nJefeC) {
@@ -31,7 +30,6 @@ public class EnemigoC extends EnemigoAbstract {
 			}
 			d += 70;
 		}
-		velocidad = (float) 1.25;
 	}
 
 	/**
@@ -88,7 +86,7 @@ public class EnemigoC extends EnemigoAbstract {
 		if (listaC.getInicio() != null) {
 			NodoSimple aux = listaC.getInicio();
 			if (listaC.getUltimo().getEnemigo().getX() >= 1100) {
-				ext = -2;
+				ext = -1;
 				for (int i = 0; i < listaC.getTamano(); i++) {
 					aux.getEnemigo().setY(aux.getEnemigo().getY() - 64);
 					aux = aux.getSiguiente();
@@ -96,7 +94,7 @@ public class EnemigoC extends EnemigoAbstract {
 				aux = listaC.getInicio();
 			}
 			if (aux.getEnemigo().getX() <= 0) {
-				ext = 2;
+				ext = 1;
 				for (int i = 0; i < listaC.getTamano(); i++) {
 					aux.getEnemigo().setY(aux.getEnemigo().getY() - 64);
 					aux = aux.getSiguiente();
@@ -104,7 +102,7 @@ public class EnemigoC extends EnemigoAbstract {
 				aux = listaC.getInicio();
 			}
 			for (int i = 0; i < listaC.getTamano(); i++) {
-				aux.getEnemigo().setX(aux.getEnemigo().getX() + ext * velocidad);
+				aux.getEnemigo().setX(aux.getEnemigo().getX() + ext * PantallaJuego.getVel());
 				aux = aux.getSiguiente();
 			}
 		}

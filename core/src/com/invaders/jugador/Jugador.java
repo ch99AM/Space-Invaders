@@ -29,27 +29,41 @@ public class Jugador {
 	 * Actualiza las movimientos de a nave cuando el jugador la acciona
 	 */
 	public void renderJugador() {
-		x = mover();
+
+		mover();
 		MainInvaders.batch.draw(naveJ, x, 0);
 
 	}
 
 	/**
-	 * Mueve la nave segun las entradas del jugador
-	 * 
-	 * @return
+	 * Mueve la nave segun las entradas del jugador en el teclado
 	 */
-	public int mover() {
+	public void mover() {
 		boolean der = Gdx.input.isKeyPressed(Input.Keys.RIGHT);
 		boolean izq = Gdx.input.isKeyPressed(Input.Keys.LEFT);
 		if (der != izq) {
 			if (der == true && x < 1072) {
-				this.x += 4;
+				moverAux(der, izq);
 			} else if (izq == true && x > 0) {
-				this.x -= 4;
+				moverAux(der, izq);
 			}
 		}
-		return x;
+	}
+
+	/**
+	 * Cambia las coordenas de las nave
+	 * 
+	 * @param der
+	 *            True si se tiene que mover a la derecha false de lo contrario
+	 * @param izq
+	 *            True si se tiene que mover a la izquierda false de lo contrario
+	 */
+	public void moverAux(boolean der, boolean izq) {
+		if (der == true && x < 1072) {
+			this.x += 4;
+		} else if (izq == true && x > 0) {
+			this.x -= 4;
+		}
 	}
 
 	/**
@@ -66,6 +80,20 @@ public class Jugador {
 
 	public int getX() {
 		return x;
+	}
+
+	/**
+	 * Recibe las entradas hechas por el control cuando se utiliza
+	 * 
+	 * @param movido
+	 *            hacia que lugar se movio la nave
+	 */
+	public void control(String movido) {
+		if (movido == "derecha" && x < 1072) {
+			moverAux(true, false);
+		} else if (movido == "izquierda" && x > 0) {
+			moverAux(false, true);
+		}
 	}
 
 }
