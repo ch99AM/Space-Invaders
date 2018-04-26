@@ -48,7 +48,7 @@ public class NivelTres {
 	 *            La posicion del disparo en y
 	 */
 	public void render(int x, int y) {
-		PantallaJuego.setVel((float)2.25);
+		PantallaJuego.setVel((float)2.50);
 		font.draw(MainInvaders.batch, "Nivel Tres", 1050, 680);
 		if (enemigo1.existo()) {
 			enemigo1.renderLista(x, y);

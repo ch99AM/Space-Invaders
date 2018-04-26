@@ -1,5 +1,8 @@
 package com.invaders.enemigos;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Files.FileType;
+import com.badlogic.gdx.audio.Sound;
 import com.invaders.jugador.Disparo;
 import com.invaders.jugador.Jugador;
 import com.invaders.listas.ListaDoble;
@@ -15,23 +18,15 @@ import com.invaders.main.PantallaJuego;
  */
 public class EnemigoB extends EnemigoAbstract {
 
-	public ListaDoble listaB;
+	private ListaDoble listaB;
 	private int tiempo;
 	private int extremo = 1; // bandera que indica si esta en un extremo
+	protected Sound destruido;
 
-	public EnemigoB(int numE) {
+	public EnemigoB(ListaDoble lista) {
 		tiempo = 0;
-		listaB = new ListaDoble();
-		int b = 0; //
-		int nJefeB = (int) (Math.random() * numE); // saca la posicion del jefe
-		for (int i = 0; i <= numE; i++) {
-			if (i == nJefeB) {
-				listaB.agregarAlfinal(4, b, 680);
-			} else {
-				listaB.agregarAlfinal(1, b, 680);
-			}
-			b += 70;
-		}
+		this.listaB = lista;
+		destruido = Gdx.audio.newSound(Gdx.files.getFileHandle("Sounds/destruido.ogg", FileType.Internal));
 	}
 
 	/**
@@ -106,6 +101,7 @@ public class EnemigoB extends EnemigoAbstract {
 			if (posicion != -2) {
 				if (listaB.eliminarNodo(posicion)) {
 					agrupar(posicion);
+					destruido.play();
 				}
 				Disparo.y = 720;
 			}
@@ -197,7 +193,7 @@ public class EnemigoB extends EnemigoAbstract {
 	 * @return True si no todavia existe
 	 */
 	public boolean existo() {
-		return listaB.getTamano() != 0;
+		return listaB.getTamano() != 0 || listaB.getInicio() != null;
 	}
 
 	/**

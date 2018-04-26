@@ -61,7 +61,7 @@ public class NivelUno {
 	 *            Posicion del disparo en y
 	 */
 	public void render(int x, int y) {
-		PantallaJuego.setVel((float)1.75);
+		PantallaJuego.setVel((float)2);
 		if (enemigo1.existo()) {
 			enemigo1.renderLista(x, y);
 			font.draw(MainInvaders.batch, "EnemigoBase", 500, 680);

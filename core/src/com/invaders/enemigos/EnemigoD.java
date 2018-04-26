@@ -16,23 +16,10 @@ public class EnemigoD extends EnemigoAbstract {
 
 	public ListaSort listaSort;
 	private int ext = 2;
-	private int velocidad;
 
-	public EnemigoD(int numE) {
-		listaSort = new ListaSort();
-		int d = 0;
-		int nJefeD = (int) (Math.random() * numE); // saca la posicion del jefe
-		for (int i = 0; i <= numE; i++) {
-			int vida = (int) (Math.random() * 2) + 1;
-			if (i == nJefeD) {
-				listaSort.agregarAlFinal(4, d, 630);
-			} else {
-				listaSort.agregarAlFinal(vida, d, 630);
-			}
-			d += 70;
-		}
+	public EnemigoD(ListaSort lista) {
+		listaSort = lista;
 		listaSort.bubbleSort();
-
 		listaSort.listarvida();
 	}
 

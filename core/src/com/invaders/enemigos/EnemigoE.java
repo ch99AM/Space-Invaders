@@ -7,6 +7,7 @@ import com.invaders.jugador.Jugador;
 import com.invaders.listas.ListaCirDoble;
 import com.invaders.listas.NodoDoble;
 import com.invaders.main.MainInvaders;
+import com.invaders.main.PantallaJuego;
 
 /**
  * Contiene los metodos para controlar al enemigo E
@@ -16,23 +17,10 @@ import com.invaders.main.MainInvaders;
 public class EnemigoE extends EnemigoAbstract {
 
 	private ListaCirDoble listaEnemigos;
-	private float velocidad;
 	private int ext = 1; // Indica si la hilera llego a un extremo
 
-	public EnemigoE() {
-		int numE = 6;
-		listaEnemigos = new ListaCirDoble();
-
-		int e = 840;
-		for (int i = 0; i <= numE; i++) {
-			if (i == 3) {
-				listaEnemigos.agregarAlFinal(4, e, 420);
-			} else {
-				listaEnemigos.agregarAlFinal(1, e, 420);
-			}
-			e -= 70;
-		}
-		velocidad = (float) 0.75;
+	public EnemigoE(ListaCirDoble lista) {
+		listaEnemigos = lista;
 	}
 
 	/**
@@ -106,7 +94,7 @@ public class EnemigoE extends EnemigoAbstract {
 				aux = listaEnemigos.getInicio();
 			}
 			for (int i = 0; i < listaEnemigos.getTamano(); i++) {
-				aux.getEnemigo().setX(aux.getEnemigo().getX() + ext * velocidad);
+				aux.getEnemigo().setX(aux.getEnemigo().getX() + ext * PantallaJuego.getVel());
 				aux = aux.getSiguiente();
 			}
 		}

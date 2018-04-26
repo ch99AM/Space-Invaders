@@ -22,16 +22,9 @@ public class EnemigoBase extends EnemigoAbstract {
 	protected Sound destruido;
 	protected float ext = 1; // bandera que indica si esta en un extremo
 
-	public EnemigoBase(int numE) {
-		listaEnemigos = new ListaBase();
-		destruido = Gdx.audio.newSound(Gdx.files.getFileHandle("Sounds/Shoot.wav", FileType.Internal));
-
-		int a = 0; // Contador de posiciones para dibujar a los enemigos
-		for (int i = 0; i <= numE; i++) {
-			listaEnemigos.agregarAlfinal(1, a, 680);
-			a += 70;
-		}
-
+	public EnemigoBase(ListaBase lista) {
+		listaEnemigos = lista;
+		destruido = Gdx.audio.newSound(Gdx.files.getFileHandle("Sounds/destruido.ogg", FileType.Internal));
 	}
 
 	/**

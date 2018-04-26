@@ -1,5 +1,8 @@
 package com.invaders.enemigos;
 
+import com.badlogic.gdx.Files.FileType;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.invaders.jugador.Disparo;
 import com.invaders.jugador.Jugador;
 import com.invaders.listas.ListaCircular;
@@ -17,19 +20,12 @@ public class EnemigoC extends EnemigoAbstract {
 
 	private ListaCircular listaC;
 	private int ext = 1; // Bandera para mover hacia abajo la hilera
+	Sound destruido;
+	
+	public EnemigoC(ListaCircular lista) {
+		listaC = lista;
+		destruido = Gdx.audio.newSound(Gdx.files.getFileHandle("Sounds/destruido.ogg", FileType.Internal));
 
-	public EnemigoC(int numE) {
-		listaC = new ListaCircular();
-		int d = 0; 
-		int nJefeC = (int) (Math.random() * numE); // saca la posicion del jefe
-		for (int i = 0; i <= numE; i++) {
-			if (i == nJefeC) {
-				listaC.agregarAlFinal(3, d, 680);
-			} else {
-				listaC.agregarAlFinal(1, d, 680);
-			}
-			d += 70;
-		}
 	}
 
 	/**
@@ -46,6 +42,7 @@ public class EnemigoC extends EnemigoAbstract {
 		if (posicion != -2) {
 			if (listaC.eliminarNodo(posicion)) {
 				agrupar(posicion);
+				destruido.play();
 			}
 			Disparo.y = 720;
 		}

@@ -21,7 +21,7 @@ public class MainInvaders extends Game {
 	@Override
 	public void create () {
 		
-		music = Gdx.audio.newMusic(Gdx.files.getFileHandle("Game.wav", FileType.Internal));
+		music = Gdx.audio.newMusic(Gdx.files.getFileHandle("Sounds/Game.wav", FileType.Internal));
 		music.setVolume(0.5f);
 		music.play(); 
 		music.setLooping(true);

@@ -53,7 +53,7 @@ public class NivelDos {
 	 *            La posicion y del disparo
 	 */
 	public void render(int x, int y) {
-		PantallaJuego.setVel((float)2);
+		PantallaJuego.setVel((float)2.25);
 		if (enemigo1.existo()) {
 			enemigo1.renderLista(x, y);
 			font.draw(MainInvaders.batch, "EnemigoBase", 500, 680);

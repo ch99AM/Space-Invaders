@@ -1,6 +1,7 @@
 package com.invaders.main;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Files.FileType;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
@@ -27,7 +28,8 @@ public class PantallaJuego extends PantallaBase {
 	private NivelUno N1;
 	private Servidor servidor;
 	private static float velocidad;
-
+	
+	
 	/**
 	 * Contructor Inicia los componetes necesarios para que el juego funcione
 	 * 
@@ -60,7 +62,13 @@ public class PantallaJuego extends PantallaBase {
 		Gdx.gl.glClearColor(0, 0, 0, 0.15f);
 
 		MainInvaders.batch.begin();
-
+		
+		if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)){
+			servidor.stop();
+			Menu menu = new Menu(invaders);
+			invaders.setScreen(menu);
+		}
+		
 		MainInvaders.batch.draw(fondo, 0, 0);
 
 		String StrPuntaje = Integer.toString(Jugador.puntaje);
@@ -76,6 +84,7 @@ public class PantallaJuego extends PantallaBase {
 			disparo.render();
 			N1.render(disparo.getX() - 30, disparo.getY());
 		} else {
+			servidor.stop();
 			Menu menu = new Menu(invaders);
 			invaders.setScreen(menu);
 			gameOver.play(50f);
@@ -93,9 +102,7 @@ public class PantallaJuego extends PantallaBase {
 			if (servidor.getDisparo().equals("true")) {
 				disparo.setX(ju1.getX(), true);
 				disparo.ctrDisparado(true);
-			} // else if (servidor.getDisparo().equals("false")) {
-				// disparo.ctrDisparado(false);
-			// }
+			}
 			if (servidor.getSeeMov().equals("derecha")) {
 				ju1.moverAux(true, false);
 			} else if (servidor.getSeeMov().equals("izquierda")) {

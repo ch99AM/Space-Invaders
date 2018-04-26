@@ -1,6 +1,7 @@
 package com.invaders.enemigos;
 
 import com.invaders.jugador.Jugador;
+import com.invaders.listas.ListaBase;
 import com.invaders.listas.NodoSimple;
 import com.invaders.main.MainInvaders;
 
@@ -13,18 +14,8 @@ import com.invaders.main.MainInvaders;
  */
 public class EnemigoA extends EnemigoBase {
 
-	public EnemigoA(int numE) {
-		super(-50);
-		int b = 0; //
-		int nJefeA = (int) (Math.random() * numE); // saca la posicion del jefe
-		for (int i = 0; i <= numE; i++) {
-			if (i == nJefeA) {
-				listaEnemigos.agregarAlfinal(4, b, 680);
-			} else {
-				listaEnemigos.agregarAlfinal(1, b, 680);
-			}
-			b += 70;
-		}
+	public EnemigoA(ListaBase lista) {
+		super(lista);
 	}
 
 	/**

@@ -152,6 +152,7 @@ public class ListaBase {
 	 */
 	public void EliLista() {
 		this.inicio = null;
+		this.tamano = 0;
 
 	}
 }
