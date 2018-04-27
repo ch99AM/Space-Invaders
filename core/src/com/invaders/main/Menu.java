@@ -71,6 +71,7 @@ public class Menu extends PantallaBase {
 				MainInvaders.batch.draw(flecha, 520, 127);
 				if (Gdx.input.isKeyPressed(Input.Keys.ENTER)) {
 					
+					
 				}
 			}
 		}

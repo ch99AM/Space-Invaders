@@ -48,7 +48,6 @@ public class PantallaJuego extends PantallaBase {
 		ju1 = new Jugador();
 		disparo = new Disparo();
 		N1 = new NivelUno(font);
-
 		servidor = new Servidor();
 		servidor.start();
 	}
@@ -64,7 +63,6 @@ public class PantallaJuego extends PantallaBase {
 		MainInvaders.batch.begin();
 		
 		if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)){
-			servidor.stop();
 			Menu menu = new Menu(invaders);
 			invaders.setScreen(menu);
 		}
@@ -84,7 +82,6 @@ public class PantallaJuego extends PantallaBase {
 			disparo.render();
 			N1.render(disparo.getX() - 30, disparo.getY());
 		} else {
-			servidor.stop();
 			Menu menu = new Menu(invaders);
 			invaders.setScreen(menu);
 			gameOver.play(50f);
@@ -98,7 +95,6 @@ public class PantallaJuego extends PantallaBase {
 	 */
 	public void control() {
 		if (servidor.getDisparo() != null) {
-			System.out.println(servidor.getDisparo());
 			if (servidor.getDisparo().equals("true")) {
 				disparo.setX(ju1.getX(), true);
 				disparo.ctrDisparado(true);
@@ -117,7 +113,6 @@ public class PantallaJuego extends PantallaBase {
 	@Override
 	public void dispose() {
 		fondo.dispose();
-		servidor.stop();
 	}
 
 	/**

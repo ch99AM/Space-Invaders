@@ -23,7 +23,8 @@ public class Servidor extends Thread {
 	private static String infoJuego;
 	private String seeMov;
 	private String disparo;
-
+	
+	
 	@Override
 	public void run() {
 		try {
